@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql:sql555.main-hosting.eu
+    url: jdbc:mysql://sql555.main-hosting.eu/u239297815_ccd
     username: u239297815_ccd
     password: 3174843970aB+
     hikari:
