@@ -1,0 +1,13 @@
+server:
+  port: 3000
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/caliciudaddeportiva
+    username: root
+    password:
+    hikari:
+      connectionTimeout: 30000
+      maximumPoolSize: 2
+      maxLifetime: 1800000
+      autoCommit: true
