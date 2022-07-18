@@ -14,5 +14,6 @@ public class UserDto {
     private String correo;
     private String comuna;
     private String genero;
+    private String evento;
 
 }

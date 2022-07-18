@@ -19,14 +19,15 @@ public class CodesaRepository {
     MessageExceptionUtil messageExceptionDtoUtil;
 
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT id_usuario,nombre,identificacion,celular,correo,comuna,genero " +
+        String sql = "SELECT id_usuario,nombre,identificacion,celular,correo,comuna,genero,evento " +
                 "FROM usuario " +
                 "ORDER BY id_usuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
     }
 
+
     public List<UserDto> getUserByText(UserDto userDto) {
-        String sql = "SELECT id_usuario,nombre,identificacion,celular,correo,comuna,genero " +
+        String sql = "SELECT id_usuario,nombre,identificacion,celular,correo,comuna,genero,evento " +
                 "FROM usuario "+
                 "WHERE UPPER(cedula) LIKE UPPER(?) " +
                 "ORDER BY u.id_usuario ";
@@ -47,16 +48,24 @@ public class CodesaRepository {
     }
 
     public int createUser(UserDto userDto) {
-        String sql = "INSERT INTO usuario (id_usuario,nombre,identificacion,celular,correo,comuna,genero ) " +
-                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
-        return template.update(sql, new Object[]{userDto.getNombre(), userDto.getIdentificacion(), userDto.getCelular(), userDto.getCorreo(),userDto.getComuna(),userDto.getGenero()});
+        String sql = "INSERT INTO usuario (id_usuario,nombre,identificacion,celular,correo,comuna,genero,evento ) " +
+                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?,?)";
+        return template.update(sql, new Object[]{userDto.getNombre(), userDto.getIdentificacion(), userDto.getCelular(), userDto.getCorreo(),userDto.getComuna(),userDto.getGenero(),userDto.getEvento()});
     }
 
     public int getUserByName(UserDto userDto) {
         String sql = "SELECT COUNT(celular) " +
                 "FROM usuario " +
-                "WHERE UPPER(celular) = UPPER(?)";
+                "WHERE UPPER(celular) = UPPER(?) AND  UPPER(evento) = UPPER(?)";
 
-        return template.queryForObject(sql, new Object[]{userDto.getCelular()}, Integer.class);
+        return template.queryForObject(sql, new Object[]{userDto.getCelular(),userDto.getEvento()}, Integer.class);
     }
+
+    public int getTotal(UserDto userDto) {
+        String sql = "SELECT COUNT(id_usuario) " +
+                "FROM usuario " ;
+
+        return template.queryForObject(sql, new Object[]{}, Integer.class);
+    }
+
 }

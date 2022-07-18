@@ -25,6 +25,7 @@ public class CodesaController {
         return ResponseEntity.ok().body(GenericDto.sucess(codesaService.getAllUsers()));
     }
 
+
     @CrossOrigin(origins = "*", methods = {RequestMethod.POST})
     @PostMapping("/getUserByText")
         public ResponseEntity<GenericDto> getUserByText(@RequestBody UserDto userDto) {
