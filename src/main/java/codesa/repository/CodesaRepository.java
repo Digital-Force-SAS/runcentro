@@ -19,8 +19,8 @@ public class CodesaRepository {
     MessageExceptionUtil messageExceptionDtoUtil;
 
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT id_usuario,nombre,identificacion,direccion,comuna,celular,correo,fecha_na,genero,institucion,evento " +
-                "FROM usuarios " +
+        String sql = "SELECT id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB  " +
+                "FROM usuario " +
                 "ORDER BY id_usuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
     }
@@ -28,17 +28,17 @@ public class CodesaRepository {
 
     public List<UserDto> getUserByText(UserDto userDto) {
         String sql = "SELECT id_usuario,nombre,identificacion,celular,correo,comuna,genero,evento " +
-                "FROM usuarios "+
+                "FROM usuario "+
                 "WHERE UPPER(cedula) LIKE UPPER(?) " +
                 "ORDER BY u.id_usuario ";
-        return template.query(sql, new Object[]{'%' + userDto.getNombre() + '%'}, new BeanPropertyRowMapper(UserDto.class));
+        return template.query(sql, new Object[]{'%' + userDto.getNombreA() + '%'}, new BeanPropertyRowMapper(UserDto.class));
     }
 
     public int updateUsuario(UserDto userDto) {
         String sql = "update usuarios " +
                 " set nombre = ?, activo = ?, id_rol = ? " +
                 " WHERE id_usuario=?";
-        return template.update(sql, new Object[]{userDto.getNombre(), userDto.getIdUsuario()});
+        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getId_usuario()});
     }
 
     public int deleteUser(int idUsuario) {
@@ -47,23 +47,25 @@ public class CodesaRepository {
         return template.update(sql, new Object[]{idUsuario});
     }
 
+
     public int createUser(UserDto userDto) {
-        String sql = "INSERT INTO usuarios (id_usuario,nombre,identificacion,direccion,comuna,celular,correo,fecha_na,genero,institucion,evento ) " +
-                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
-        return template.update(sql, new Object[]{userDto.getNombre(), userDto.getIdentificacion(), userDto.getDireccion(),userDto.getComuna(),userDto.getCelular(), userDto.getCorreo(),userDto.getFecha_na(),userDto.getGenero(),userDto.getInstitucion(),userDto.getEvento()});
+        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB ) " +
+                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?)";
+        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB()});
     }
 
-    public int getUserByName(UserDto userDto) {
-        String sql = "SELECT COUNT(celular) " +
-                "FROM usuarios " +
-                "WHERE UPPER(celular) = UPPER(?) AND  UPPER(evento) = UPPER(?)";
 
-        return template.queryForObject(sql, new Object[]{userDto.getCelular(),userDto.getEvento()}, Integer.class);
+    public int getUserByName(UserDto userDto) {
+        String sql = "SELECT COUNT(identificacionA) " +
+                "FROM usuario " +
+                "WHERE UPPER(identificacionA) = UPPER(?)";
+
+        return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA()}, Integer.class);
     }
 
     public int getTotal(UserDto userDto) {
         String sql = "SELECT COUNT(id_usuario) " +
-                "FROM usuarios " ;
+                "FROM usuario " ;
 
         return template.queryForObject(sql, new Object[]{}, Integer.class);
     }
