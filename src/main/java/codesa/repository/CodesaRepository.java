@@ -19,7 +19,7 @@ public class CodesaRepository {
     MessageExceptionUtil messageExceptionDtoUtil;
 
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB  " +
+        String sql = "SELECT id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento  " +
                 "FROM usuario " +
                 "ORDER BY id_usuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
@@ -49,18 +49,18 @@ public class CodesaRepository {
 
 
     public int createUser(UserDto userDto) {
-        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB ) " +
-                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?)";
-        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB()});
+        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento ) " +
+                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?,?)";
+        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB(),userDto.getEvento()});
     }
 
 
     public int getUserByName(UserDto userDto) {
         String sql = "SELECT COUNT(identificacionA) " +
                 "FROM usuario " +
-                "WHERE UPPER(identificacionA) = UPPER(?)";
+                "WHERE UPPER(identificacionA) = UPPER(?) AND UPPER(evento) = UPPER(?)";
 
-        return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA()}, Integer.class);
+        return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA(),userDto.getEvento()}, Integer.class);
     }
 
     public int getTotal(UserDto userDto) {

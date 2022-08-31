@@ -22,6 +22,8 @@ public class UserDto {
     private String nombreb;
     private String identificacionB;
     private String laborB;
+    private String evento;
+
 
 
 
