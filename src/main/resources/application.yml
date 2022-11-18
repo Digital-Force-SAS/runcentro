@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://sql434.main-hosting.eu/u938606973_ccd
-    username: u938606973_ccd
+    url: jdbc:mysql://sql141.main-hosting.eu/u938606973_palcos
+    username: u938606973_palcos
     password: 3174843970aB+
     hikari:
       connectionTimeout: 30000
