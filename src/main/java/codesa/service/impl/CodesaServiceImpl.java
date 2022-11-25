@@ -1,6 +1,7 @@
 package codesa.service.impl;
 
 import codesa.micellaneus.constantes.ValidationMessageEnum;
+import codesa.micellaneus.dto.EntradaDto;
 import codesa.micellaneus.dto.UserDto;
 import codesa.micellaneus.exeption.BusinessCodesaException;
 import codesa.micellaneus.util.MessageExceptionUtil;
@@ -41,6 +42,8 @@ public class CodesaServiceImpl implements CodesaService {
         }
     }
 
+
+
     @Override
     public boolean updateUser(UserDto userDto) {
         try {
@@ -50,6 +53,31 @@ public class CodesaServiceImpl implements CodesaService {
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_UPDATE_USER));
         }
     }
+
+
+    @Override
+    public boolean updateentrada(EntradaDto entradaDto) {
+        if (codesaRepository.getentrada(entradaDto) != 1){
+            throw new BusinessCodesaException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_NATE_ENTRADA));
+
+
+        }
+        return codesaRepository.validarEntrada(entradaDto) > 0;
+    }
+
+    @Override
+    public boolean consultentrada(EntradaDto entradaDto) {
+        if (codesaRepository.getentrada(entradaDto) > 0){
+
+            throw new BusinessCodesaException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_UPDATE_ENTRADA));
+        }
+        return codesaRepository.getentrada(entradaDto) > 0;
+
+    }
+
+
 
     @Override
     public boolean deleteUser(int idUsuario) {
@@ -63,6 +91,8 @@ public class CodesaServiceImpl implements CodesaService {
 
 
 
+
+
     @Override
     public boolean createUser(UserDto userDto) {
             if (codesaRepository.getUserByName(userDto) > 0){
@@ -71,6 +101,26 @@ public class CodesaServiceImpl implements CodesaService {
             }
             return codesaRepository.createUser(userDto) > 0;
         }
+
+
+    @Override
+    public boolean createUser1(UserDto userDto) {
+        if (codesaRepository.getUserByName(userDto) > 0){
+            throw new BusinessCodesaException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_USUARION_PERSONA_ENTRADA));
+        }
+
+        EntradaDto entradaDto = new EntradaDto();
+        entradaDto.setCodigo(userDto.getCodigo());
+
+        if (codesaRepository.getentrada(entradaDto) != 1){
+            throw new BusinessCodesaException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_NATE_ENTRADA));
+        }
+
+
+        return codesaRepository.createUser(userDto) > 0;
+    }
 
 
 

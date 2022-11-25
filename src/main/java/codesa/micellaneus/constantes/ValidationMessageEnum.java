@@ -6,6 +6,13 @@ public enum ValidationMessageEnum {
     ERROR_CREATE_USER("ErrorCreateUser.code", "ErrorCreateUser.message", "ErrorCreateUser.recomen"),
     ERROR_DELETE_USER("ErrorDeleteeUser.code", "ErrorDeleteeUser.message", "ErrorDeleteeUser.recomen"),
     ERROR_UPDATE_USER("ErrorUpdateUser.code", "ErrorUpdateUser.message", "ErrorUpdateUser.recomen"),
+
+    ERROR_UPDATE_ENTRADA("entradaexist.code", "ENTRADAEXIST.message", "ENTRADAALREADYEXIST.recomen"),
+
+    ERROR_USUARION_PERSONA_ENTRADA("UserAlreadyExistspersona.code", "UserAlreadyExistspersona.message", "ENTRADAALREADYEXIST.recomen"),
+
+    ERROR_NATE_ENTRADA("entradanotexist.code", "ENTRADAnotEXIST.message", "ENTRADAALREADYEXIST.recomen"),
+
     ERROR_GET_USERS("ErrorGetUser.code", "ErrorGetUser.message", "ErrorGetUser.recomen"),
     ERROR_GET_ALL_USERS("ErrorGetAllUser.code", "ErrorGetAllUser.message", "ErrorGetAllUser.recomen"),
     UnknownException("UnknownException.code", "UnknownException.message", "UnknownException.recomen");

@@ -1,5 +1,6 @@
 package codesa.repository;
 
+import codesa.micellaneus.dto.EntradaDto;
 import codesa.micellaneus.dto.UserDto;
 import codesa.micellaneus.util.MessageExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class CodesaRepository {
     MessageExceptionUtil messageExceptionDtoUtil;
 
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento  " +
+        String sql = "SELECT id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento,variable1,variable2,variable3,variable4,variable5 " +
                 "FROM usuario " +
                 "ORDER BY id_usuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
@@ -49,9 +50,34 @@ public class CodesaRepository {
 
 
     public int createUser(UserDto userDto) {
-        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento ) " +
-                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?,?)";
-        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB(),userDto.getEvento()});
+        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento,variable1,variable2,variable3,variable4,variable5 ) " +
+                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?,?,?,?,?,?,?)";
+        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB(),userDto.getEvento(),userDto.getVariable1(),userDto.getVariable2(),userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5()});
+    }
+
+    public int createUser1(UserDto userDto) {
+        String sql = "INSERT INTO usuario (id_usuario,nombreA,identificacionA,edadA,generoA,etniaA,celularA,correoA,comunaA,nombreb,identificacionB,laborB,evento,variable1,variable2,variable3,variable4,variable5 ) " +
+                "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?,?,?,?,?,?,?,?)";
+        return template.update(sql, new Object[]{userDto.getNombreA(), userDto.getIdentificacionA(), userDto.getEdadA(),userDto.getGeneroA(),userDto.getEtniaA(), userDto.getCelularA(),userDto.getCorreoA(),userDto.getComunaA(),userDto.getNombreb(),userDto.getIdentificacionB(),userDto.getLaborB(),userDto.getEvento(),userDto.getVariable1(),userDto.getVariable2(),userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5()});
+    }
+
+
+
+    public int validarEntrada(EntradaDto entradaDto) {
+        String sql = "update entrada " +
+                " set estado = 'true' " +
+                "WHERE UPPER(codigo) = UPPER(?) ";
+
+        return template.update(sql, new Object[]{entradaDto.getCodigo()});
+    }
+
+
+    public int getentrada(EntradaDto entradaDto) {
+        String sql = "SELECT COUNT(codigo) " +
+                "FROM entrada " +
+                "WHERE UPPER(codigo) = UPPER(?) AND   estado = 'false' ";
+
+        return template.queryForObject(sql, new Object[]{entradaDto.getCodigo()}, Integer.class);
     }
 
 
@@ -62,6 +88,10 @@ public class CodesaRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA(),userDto.getEvento()}, Integer.class);
     }
+
+
+
+
 
     public int getTotal(UserDto userDto) {
         String sql = "SELECT COUNT(id_usuario) " +

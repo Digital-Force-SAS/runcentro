@@ -23,6 +23,13 @@ public class UserDto {
     private String identificacionB;
     private String laborB;
     private String evento;
+    private String variable1;
+    private String variable2;
+    private String variable3;
+    private String variable4;
+    private String variable5;
+    private String codigo;
+
 
 
 
