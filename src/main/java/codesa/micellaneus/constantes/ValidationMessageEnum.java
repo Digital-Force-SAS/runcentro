@@ -11,6 +11,7 @@ public enum ValidationMessageEnum {
 
     ERROR_USUARION_PERSONA_ENTRADA("UserAlreadyExistspersona.code", "UserAlreadyExistspersona.message", "ENTRADAALREADYEXIST.recomen"),
 
+    ERROR_PLACA_PERSONA_ENTRADA("PlacaAlreadyExistspersona.code", "PlacaAlreadyExistspersona.message", "PlacaAlreadyExistspersona.recomen"),
     ERROR_NATE_ENTRADA("entradanotexist.code", "ENTRADAnotEXIST.message", "ENTRADAALREADYEXIST.recomen"),
 
     ERROR_GET_USERS("ErrorGetUser.code", "ErrorGetUser.message", "ErrorGetUser.recomen"),

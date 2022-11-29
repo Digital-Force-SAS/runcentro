@@ -98,8 +98,11 @@ public class CodesaServiceImpl implements CodesaService {
             if (codesaRepository.getUserByName(userDto) > 0){
                 throw new BusinessCodesaException(
                         messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
-            }
-            return codesaRepository.createUser(userDto) > 0;
+            } else if (codesaRepository.getcupos(userDto) >= 21){
+            throw new BusinessCodesaException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_PLACA_PERSONA_ENTRADA));
+        }
+        return codesaRepository.createUser(userDto) > 0;
         }
 
 

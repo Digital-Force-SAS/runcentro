@@ -79,7 +79,13 @@ public class CodesaRepository {
 
         return template.queryForObject(sql, new Object[]{entradaDto.getCodigo()}, Integer.class);
     }
+    public int getcupos(UserDto userDto) {
+        String sql = "SELECT COUNT(laborB) " +
+                "FROM usuario "+
+                "WHERE UPPER(laborB) = UPPER(?) AND UPPER (variable5) = 'true' ";
 
+        return template.queryForObject(sql,new Object[]{userDto.getLaborB()},Integer.class);
+    }
 
     public int getUserByName(UserDto userDto) {
         String sql = "SELECT COUNT(identificacionA) " +
