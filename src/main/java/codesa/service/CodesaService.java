@@ -25,6 +25,8 @@ public interface CodesaService {
     boolean consultentrada(EntradaDto entradaDto);
 
 
+    boolean createUser3(UserDto userDto);
+
     boolean createUser1(UserDto userDto);
 
 

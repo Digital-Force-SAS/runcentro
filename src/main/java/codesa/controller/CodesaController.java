@@ -30,6 +30,13 @@ public class CodesaController {
 
 
     @CrossOrigin(origins = "*", methods = {RequestMethod.POST})
+    @PostMapping("/createUser3")
+    public ResponseEntity<GenericDto> createUser3(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(codesaService.createUser3(userDto)), HttpStatus.CREATED);
+    }
+
+
+    @CrossOrigin(origins = "*", methods = {RequestMethod.POST})
     @PostMapping("/updateentrada")
     public ResponseEntity<GenericDto> updateentrada(@RequestBody EntradaDto entradaDto) {
         return new ResponseEntity<>(GenericDto.sucess(codesaService.updateentrada(entradaDto)), HttpStatus.CREATED);
