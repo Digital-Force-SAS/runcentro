@@ -109,10 +109,7 @@ public class CodesaServiceImpl implements CodesaService {
 
     @Override
     public boolean createUser3(UserDto userDto) {
-        if (codesaRepository.getUserByName(userDto) > 0){
-            throw new BusinessCodesaException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_USUARION_PERSONA_ENTRADA));
-        }
+
         return codesaRepository.createUser(userDto) > 0;
     }
 
