@@ -95,6 +95,14 @@ public class CodesaRepository {
         return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA(),userDto.getEvento()}, Integer.class);
     }
 
+    public int getUsermayor(UserDto userDto) {
+        String sql = "SELECT COUNT(identificacionA) " +
+                "FROM usuario " +
+                "WHERE UPPER(identificacionA) = UPPER(?) AND UPPER(evento) = UPPER(?)";
+
+        return template.queryForObject(sql, new Object[]{userDto.getIdentificacionA(),userDto.getEvento()}, Integer.class);
+    }
+
 
 
 
