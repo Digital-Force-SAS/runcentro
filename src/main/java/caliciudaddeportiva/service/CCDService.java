@@ -10,6 +10,7 @@ public interface CCDService {
     List<UserDto> getAllUsers();
     List<UserDto> getAllCiudadela4s(UserDto userDto);
     List<UserDto> GetRegalopersona(UserDto userDto);
+    List<UserDto> GetRegalopersonamenor(UserDto userDto);
 
 
 
@@ -29,6 +30,8 @@ public interface CCDService {
 
 
     boolean validarregalo(UserDto userDto);
+    boolean validarregaloadulto(UserDto userDto);
+
 
 
 }

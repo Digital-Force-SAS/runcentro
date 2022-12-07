@@ -32,6 +32,12 @@ public class CCDController {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.validarregalo(userDto)), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com", "*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/validarregaloadulto")
+    public ResponseEntity<GenericDto> validarregaloadulto(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.validarregaloadulto(userDto)), HttpStatus.CREATED);
+    }
+
 
 
 
@@ -68,6 +74,14 @@ public class CCDController {
         public ResponseEntity<GenericDto> GetRegalopersona(@RequestBody UserDto userDto) {
             return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersona(userDto)));
         }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com", "*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/GetRegalopersonamenor")
+    public ResponseEntity<GenericDto> GetRegalopersonamenor(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersonamenor(userDto)));
+    }
+
+
 
 
 

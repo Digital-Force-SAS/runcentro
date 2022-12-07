@@ -34,7 +34,7 @@ public class CCDRepository {
     public List<UserDto> getAllCiudadela4s(UserDto userDto) {
         String sql = "SELECT variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
                 "FROM usuarios "+
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'Pendiente'"+
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"+
                 "LIMIT 1 ";
         return template.query(sql, new Object[]{'%' + userDto.getVariable1() + '%'}, new BeanPropertyRowMapper(UserDto.class));
     }
@@ -55,9 +55,16 @@ public class CCDRepository {
 
     public int updateUsuario(UserDto userDto) {
         String sql = "update usuarios " +
-                " set variable13 = 'verificado'" +
+                " set variable13 = 'pendiente'" +
                 " WHERE variable1= ? ";
         return template.update(sql, new Object[]{userDto.getVariable1()});
+    }
+
+    public int updateUsuarioadulto(UserDto userDto) {
+        String sql = "update usuarios " +
+                " set variable13 = 'pendiente'" +
+                " WHERE variable10= ? ";
+        return template.update(sql, new Object[]{userDto.getVariable10()});
     }
 
 
@@ -135,12 +142,59 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
+    public int getRegaloadulto(UserDto userDto) {
+        String sql = "SELECT COUNT(variable10) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable10) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable10()}, Integer.class);
+    }
+
+
+
+    public int getpersonaregalodulto(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable10) = UPPER(?) AND evento = 'ciudadela4' ";
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable10()}, Integer.class);
+    }
+
+    public int getRegalomenor(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'entregado'"
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int getpersonaregalomenor(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4' ";
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
     public List<UserDto> GetRegalopersona(UserDto userDto) {
-        String sql = "SELECT variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
+        String sql = "SELECT idusuario, variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
                 "FROM usuarios "+
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'Pendiente'"+
-                "LIMIT 1 ";
-        return template.query(sql, new Object[]{'%' + userDto.getVariable1() + '%'}, new BeanPropertyRowMapper(UserDto.class));
+                "WHERE UPPER(variable10) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"
+                ;
+        return template.query(sql, new Object[]{userDto.getVariable10()}, new BeanPropertyRowMapper(UserDto.class));
+    }
+
+
+
+
+    public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
+        String sql = "SELECT idusuario, variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
+                "FROM usuarios "+
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"
+                ;
+        return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
     }
 
 /**

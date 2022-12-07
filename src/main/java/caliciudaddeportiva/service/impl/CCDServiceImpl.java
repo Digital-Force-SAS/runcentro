@@ -43,13 +43,45 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public List<UserDto> GetRegalopersona(UserDto userDto) {
+        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        } else if (CCDRepository.getRegaloadulto(userDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
+        }
         try {
+
             return CCDRepository.GetRegalopersona(userDto);
         } catch (Exception e) {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_GET_USERS));
         }
     }
+
+
+    @Override
+    public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
+        if (CCDRepository.getpersonaregalomenor(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        } else if (CCDRepository.getRegalomenor(userDto) >= 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
+        }
+        try {
+
+            return CCDRepository.GetRegalopersonamenor(userDto);
+        } catch (Exception e) {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_GET_USERS));
+        }
+    }
+
+
+
+
+
 
 
     @Override
@@ -146,6 +178,20 @@ public class CCDServiceImpl implements CCDService {
         return CCDRepository.updateUsuario(userDto) > 0;
 
     }
+    @Override
+    public boolean validarregaloadulto(UserDto userDto) {
+        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        } else if (CCDRepository.getRegaloadulto(userDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
+        }
+        return true;
+
+    }
+
+
 
 
 
