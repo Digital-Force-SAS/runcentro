@@ -21,11 +21,7 @@ public class CCDController {
     }
 
 
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com"}, methods= {RequestMethod.GET,RequestMethod.POST})
-    @PostMapping("/entregarregalo")
-    public ResponseEntity<GenericDto> entregarregalo(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(GenericDto.sucess(CCDService.entregarregalo(userDto)), HttpStatus.CREATED);
-    }
+
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/validarregalo")
     public ResponseEntity<GenericDto> validarregalo(@RequestBody UserDto userDto) {
@@ -41,7 +37,11 @@ public class CCDController {
 
 
 
-
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/entregarregalo")
+    public ResponseEntity<GenericDto> entregarregalo(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.entregarregalo(userDto)), HttpStatus.CREATED);
+    }
 
 
 
