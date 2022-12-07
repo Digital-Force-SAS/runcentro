@@ -192,7 +192,8 @@ public class CCDRepository {
     public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
         String sql = "SELECT idusuario, variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
                 "FROM usuarios "+
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"+
+                "LIMIT 1"
                 ;
         return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
     }
