@@ -21,7 +21,7 @@ public class CCDController {
     }
 
 
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com", "*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com", "*","https://caliciudaddeportiva.com/ciudadela/regaloval"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/entregarregalo")
     public ResponseEntity<GenericDto> entregarregalo(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.entregarregalo(userDto)), HttpStatus.CREATED);
