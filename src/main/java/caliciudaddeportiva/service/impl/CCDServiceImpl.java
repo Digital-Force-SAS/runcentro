@@ -1,6 +1,8 @@
 package caliciudaddeportiva.service.impl;
 
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
+import caliciudaddeportiva.micellaneus.dto.AdminDto;
+import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
@@ -166,6 +168,25 @@ public class CCDServiceImpl implements CCDService {
         }
 
 
+
+    @Override
+    public boolean createregalo(RegaloDto regaloDto) {
+
+        return CCDRepository.createregalo(regaloDto) > 0;
+    }
+
+
+    @Override
+    public List<RegaloDto> buscarultimoregistroregalo(RegaloDto regaloDto) {
+        try {
+            return CCDRepository.buscarultimoregistroregalo(regaloDto);
+        } catch (Exception e) {
+            throw new BusinessCCDException(
+                    e  );
+        }
+    }
+
+
     @Override
     public boolean validarregalo(UserDto userDto) {
         if (CCDRepository.getpersonaregalo(userDto) == 0 ){
@@ -190,6 +211,21 @@ public class CCDServiceImpl implements CCDService {
         return true;
 
     }
+
+
+    @Override
+    public boolean loginadmin(AdminDto adminDto) {
+         if (CCDRepository.loginadmin(adminDto) < 1){
+
+
+
+             throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.login));
+        }
+        return true;
+
+    }
+
 
 
 

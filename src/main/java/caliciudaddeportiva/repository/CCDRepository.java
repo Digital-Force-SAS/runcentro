@@ -1,5 +1,7 @@
 package caliciudaddeportiva.repository;
 
+import caliciudaddeportiva.micellaneus.dto.AdminDto;
+import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +100,22 @@ public class CCDRepository {
         return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getEvento()});
     }
 
+    public int createregalo(RegaloDto regaloDto) {
+        String sql = "INSERT INTO regalos (idregalo,codigoregalo,idadminfin,idusuariofin ) " +
+                "VALUES (DEFAULT,?,?,?)";
+        return template.update(sql, new Object[]{regaloDto.getCodigoregalo(),regaloDto.getIdadminfin(),regaloDto.getIdusuariofin()});
+    }
+
+
+
+    public List<RegaloDto> buscarultimoregistroregalo(RegaloDto regaloDto) {
+        String sql = "SELECT idregalo " +
+                "FROM regalos " +
+                "WHERE UPPER(idadminfin) = UPPER(?) ";
+
+        return template.query(sql, new Object[]{ regaloDto.getIdadminfin() }, new BeanPropertyRowMapper(RegaloDto.class));
+    }
+
 
     public int getcupos(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
@@ -123,6 +141,16 @@ public class CCDRepository {
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+
+    public int loginadmin(AdminDto adminDto) {
+        String sql = "SELECT COUNT(idadministrador) " +
+                "FROM administradores  " +
+                "WHERE UPPER(usuarioadmin) = ? AND  UPPER(contrasenaadmin) = ?  AND tipo = 'admin'"
+                ;
+
+        return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
     }
 
     public int getRegalo(UserDto userDto) {
