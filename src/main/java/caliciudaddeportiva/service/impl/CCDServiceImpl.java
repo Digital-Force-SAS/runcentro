@@ -145,7 +145,7 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public boolean createciudadela(UserDto userDto) {
-        if (CCDRepository.getUserByName(userDto) > 4){
+        if (CCDRepository.getUserByName(userDto) >= 1){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_USUARION_PERSONA_ENTRADA));
         }
@@ -197,6 +197,17 @@ public class CCDServiceImpl implements CCDService {
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
         }
         return CCDRepository.updateUsuario(userDto) > 0;
+
+    }
+
+
+    @Override
+    public boolean validarmenor(UserDto userDto) {
+        if (CCDRepository.validarmenor(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Validarmenor));
+        }
+        return true;
 
     }
     @Override

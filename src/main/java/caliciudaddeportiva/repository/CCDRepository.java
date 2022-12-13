@@ -133,6 +133,16 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
+    public int validarmenor(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+
 
     public int getRegalopen(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +

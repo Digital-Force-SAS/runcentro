@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://sql141.main-hosting.eu/u938606973_CCDBD
-    username: u938606973_CCDBD
-    password: CaliCiudadDeportiva2023+
+    url: jdbc:mysql://sql805.main-hosting.eu/u938606973_Ciudadela5
+    username: u938606973_Ciudadela5
+    password: Ciudadela5+
     hikari:
       connectionTimeout: 30000
       maximumPoolSize: 2

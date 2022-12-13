@@ -18,6 +18,7 @@ public enum ValidationMessageEnum {
     regaloentrego("regaloentrego.code", "regaloentrego.message", "regaloentrego.recomen"),
     login("login.code", "login.message", "login.recomen"),
 
+    Validarmenor("validarmenor.code", "validarmenor.message", "validarmenor.recomen"),
 
 
     ERROR_GET_USERS("ErrorGetUser.code", "ErrorGetUser.message", "ErrorGetUser.recomen"),

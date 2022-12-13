@@ -32,6 +32,8 @@ public interface CCDService {
 
     boolean updateUser(UserDto userDto);
 
+    boolean validarmenor(UserDto userDto);
+
     boolean entregarregalo(UserDto userDto);
 
     boolean deleteUser(int idUsuario);
