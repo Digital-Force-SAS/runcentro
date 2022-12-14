@@ -1,6 +1,7 @@
 package caliciudaddeportiva.service;
 
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
+import caliciudaddeportiva.micellaneus.dto.CodigoDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 
@@ -24,6 +25,11 @@ public interface CCDService {
     boolean createregalo(RegaloDto regaloDto);
 
 
+    boolean createUsercodigo(UserDto userDto);
+
+    boolean validarcodigo(CodigoDto codigoDto);
+
+    boolean validarpersonacluster(UserDto userDto);
 
 
 

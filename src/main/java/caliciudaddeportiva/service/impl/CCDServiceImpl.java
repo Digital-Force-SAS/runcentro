@@ -2,6 +2,7 @@ package caliciudaddeportiva.service.impl;
 
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
+import caliciudaddeportiva.micellaneus.dto.CodigoDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
@@ -207,9 +208,40 @@ public class CCDServiceImpl implements CCDService {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Validarmenor));
         }
+        return CCDRepository.createUsercodigo(userDto) > 0;
+
+    }
+
+
+    public boolean createUsercodigo(UserDto userDto) {
+        if (CCDRepository.buscarcluster(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
+        }
+        return CCDRepository.createUsercodigo(userDto) > 0;
+
+    }
+    public boolean validarcodigo(CodigoDto codigoDto) {
+        if (CCDRepository.validarcodigo(codigoDto) != 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
+        }
         return true;
 
     }
+
+    public boolean validarpersonacluster(UserDto userDto) {
+        if (CCDRepository.buscarcluster(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
+        }
+        return true;
+
+    }
+
+
+
+
     @Override
     public boolean validarregaloadulto(UserDto userDto) {
         if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){

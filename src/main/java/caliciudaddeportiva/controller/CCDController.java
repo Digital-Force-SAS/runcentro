@@ -1,9 +1,6 @@
 package caliciudaddeportiva.controller;
 
-import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.GenericDto;
-import caliciudaddeportiva.micellaneus.dto.RegaloDto;
-import caliciudaddeportiva.micellaneus.dto.UserDto;
+import caliciudaddeportiva.micellaneus.dto.*;
 import caliciudaddeportiva.service.CCDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +26,23 @@ public class CCDController {
     @PostMapping("/createregalo")
     public ResponseEntity<GenericDto> createregalo(@RequestBody RegaloDto regaloDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.createregalo(regaloDto)), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createUsercodigo")
+    public ResponseEntity<GenericDto> createUsercodigo(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUsercodigo(userDto)), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/validarcodigo")
+    public ResponseEntity<GenericDto> validarcodigo(@RequestBody CodigoDto codigoDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.validarcodigo(codigoDto)), HttpStatus.CREATED);
+    }
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/validarpersonacluster")
+    public ResponseEntity<GenericDto> validarpersonacluster(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.validarpersonacluster(userDto)), HttpStatus.CREATED);
     }
 
 

@@ -21,6 +21,9 @@ public class UserDto {
     private String variable11;
     private String variable12;
     private String variable13;
+    private String variable14;
+    private String variable15;
+    private String variable16;
     private String evento;
 
 }

@@ -1,6 +1,7 @@
 package caliciudaddeportiva.repository;
 
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
+import caliciudaddeportiva.micellaneus.dto.CodigoDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
@@ -148,6 +149,31 @@ public class CCDRepository {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
                 "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int validarcodigo(CodigoDto codigoDto) {
+        String sql = "SELECT COUNT(idcodigo) " +
+                "FROM codigos " +
+                "WHERE UPPER(codigo) = UPPER(?) AND estado = 'inactivo' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{codigoDto.getCodigo()}, Integer.class);
+    }
+
+
+    public int createUsercodigo(UserDto userDto) {
+        String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento ) " +
+                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getVariable14(),userDto.getVariable15(),userDto.getVariable16(),userDto.getEvento()});
+    }
+
+    public int  buscarcluster (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
