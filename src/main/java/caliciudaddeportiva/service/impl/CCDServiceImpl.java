@@ -216,9 +216,19 @@ public class CCDServiceImpl implements CCDService {
     public boolean createUsercodigo(UserDto userDto) {
         if (CCDRepository.buscarcluster(userDto) >= 1 ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        }else         if (CCDRepository.buscarcodigo(userDto) == 1 ){
+            CCDRepository.createUsercodigo(userDto);
+            CCDRepository.updatecodigo(userDto) ;
+            return true;
         }
-        return CCDRepository.createUsercodigo(userDto) > 0;
+        throw new BusinessCCDException(
+                messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
+
+
+
+
+
 
     }
     public boolean validarcodigo(CodigoDto codigoDto) {

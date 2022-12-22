@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://sql718.main-hosting.eu/u650745231_clusterbd
-    username: u650745231_clusteruser
-    password: Cluster2022+
+    url: jdbc:mysql://sql805.main-hosting.eu/u938606973_feriadeportiva
+    username: u938606973_feriadeportiva
+    password: Feriadeportiva1
     hikari:
       connectionTimeout: 30000
       maximumPoolSize: 2

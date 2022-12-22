@@ -178,6 +178,22 @@ public class CCDRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
+    public int updatecodigo(UserDto userDto) {
+        String sql = "update codigos " +
+                " SET  estado = 'activo'" +
+                " WHERE codigo= ? ";
+        return template.update(sql, new Object[]{ userDto.getVariable9()});
+    }
+
+    public int  buscarcodigo (UserDto userDto) {
+        String sql = "SELECT COUNT(idcodigo) " +
+                "FROM codigos " +
+                "WHERE UPPER(codigo) = UPPER(?) and  UPPER(estado)='inactivo' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable9()}, Integer.class);
+    }
+
 
 
     public int loginadmin(AdminDto adminDto) {
