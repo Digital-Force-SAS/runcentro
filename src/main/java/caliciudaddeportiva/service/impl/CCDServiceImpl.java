@@ -243,7 +243,7 @@ public class CCDServiceImpl implements CCDService {
     public boolean validarpersonacluster(UserDto userDto) {
         if (CCDRepository.buscarcluster(userDto) >= 1 ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
         }
         return true;
 
