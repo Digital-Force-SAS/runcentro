@@ -179,6 +179,16 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
+
+    public int  buscarcluster1 (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
     public int  tallaS (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
