@@ -259,7 +259,7 @@ public class CCDServiceImpl implements CCDService {
     }
 
     public boolean createUsercodigoval(UserDto userDto) {
-        if (CCDRepository.buscarclustersinquit(userDto) >= 1) {
+        if (CCDRepository.buscarclustervalidados2(userDto) >= 1) {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
         } else if (CCDRepository.buscarcodigoval(userDto) == 1) {

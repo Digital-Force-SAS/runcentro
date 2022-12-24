@@ -247,6 +247,16 @@ public class CCDRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
+
+
+    public int  buscarclustervalidados2 (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carreraextras' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
     public int updatecodigo(UserDto userDto) {
         String sql = "update codigos " +
                 " SET  estado = 'activo'" +
