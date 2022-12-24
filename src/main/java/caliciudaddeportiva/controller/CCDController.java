@@ -60,6 +60,14 @@ public class CCDController {
     }
 
 
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/validarpersonaferia")
+    public ResponseEntity<GenericDto> validarpersonaferia(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.validarpersonaferia(userDto)), HttpStatus.CREATED);
+    }
+
+
+
 
 
 

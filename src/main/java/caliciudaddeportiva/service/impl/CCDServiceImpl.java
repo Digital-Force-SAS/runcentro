@@ -291,6 +291,16 @@ public class CCDServiceImpl implements CCDService {
 
     }
 
+    public boolean validarpersonaferia(UserDto userDto) {
+        if (CCDRepository.validarpersonaferia(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        }
+        return true;
+
+    }
+
+
 
 
 

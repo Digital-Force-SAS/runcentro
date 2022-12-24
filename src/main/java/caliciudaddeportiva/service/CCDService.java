@@ -28,6 +28,7 @@ public interface CCDService {
     boolean createUserferia(UserDto userDto);
 
     boolean createUsercodigoval(UserDto userDto);
+    boolean validarpersonaferia(UserDto userDto);
 
     boolean createUsercodigo(UserDto userDto);
 
