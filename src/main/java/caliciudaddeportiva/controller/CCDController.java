@@ -33,6 +33,20 @@ public class CCDController {
     public ResponseEntity<GenericDto> createUsercodigo(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.createUsercodigo(userDto)), HttpStatus.CREATED);
     }
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createUsercodigoval")
+    public ResponseEntity<GenericDto> createUsercodigoval(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUsercodigoval(userDto)), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createUserferia")
+    public ResponseEntity<GenericDto> createUserferia(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserferia(userDto)), HttpStatus.CREATED);
+    }
+
+
+
 
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/validarcodigo")
@@ -89,7 +103,7 @@ public class CCDController {
 
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/createciudadela")
-    public ResponseEntity<GenericDto> createUser3(@RequestBody UserDto userDto) {
+    public ResponseEntity<GenericDto> createciudadela(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.createciudadela(userDto)), HttpStatus.CREATED);
     }
 

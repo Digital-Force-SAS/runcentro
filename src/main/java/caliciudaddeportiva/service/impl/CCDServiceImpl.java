@@ -146,17 +146,23 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public boolean createciudadela(UserDto userDto) {
-        if (CCDRepository.getUserByName(userDto) >= 1){
+        if (CCDRepository.buscarcluster(userDto) >= 1 ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_USUARION_PERSONA_ENTRADA));
-        }
-        return CCDRepository.createUser(userDto) > 0;
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        }else
+            CCDRepository.createUsercodigo(userDto);
+
+            return true;
     }
 
 
 
 
-    @Override
+
+
+
+
+        @Override
     public boolean createUser(UserDto userDto) {
             if (CCDRepository.getUserByName(userDto) > 5){
                 throw new BusinessCCDException(
@@ -217,21 +223,57 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarcluster(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }else         if (CCDRepository.buscarcodigo(userDto) == 1 ){
+        }else         if (CCDRepository.buscarcodigo(userDto) < 1  ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
+        }else         if (CCDRepository.tallaS(userDto) >= 131 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else         if (CCDRepository.tallaM(userDto) >= 132 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else         if (CCDRepository.tallaL(userDto) >= 84 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else         if (CCDRepository.tallaXL(userDto) >= 32 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else         if (CCDRepository.tallaXXL(userDto) >= 9 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }
+
+        CCDRepository.createUsercodigo(userDto);
+        CCDRepository.updatecodigo(userDto) ;
+        return true;
+        }
+
+    public boolean createUserferia(UserDto userDto) {
+        if (CCDRepository.buscarclusterferia(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        }else
             CCDRepository.createUsercodigo(userDto);
-            CCDRepository.updatecodigo(userDto) ;
+        return true;
+
+    }
+
+    public boolean createUsercodigoval(UserDto userDto) {
+        if (CCDRepository.buscarclustersinquit(userDto) >= 1) {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        } else if (CCDRepository.buscarcodigoval(userDto) == 1) {
+            CCDRepository.createUsercodigo(userDto);
+            CCDRepository.updatecodigo(userDto);
             return true;
         }
         throw new BusinessCCDException(
                 messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
 
-
-
-
-
-
     }
-    public boolean validarcodigo(CodigoDto codigoDto) {
+
+
+        public boolean validarcodigo(CodigoDto codigoDto) {
         if (CCDRepository.validarcodigo(codigoDto) != 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));

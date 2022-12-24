@@ -25,6 +25,10 @@ public interface CCDService {
     boolean createregalo(RegaloDto regaloDto);
 
 
+    boolean createUserferia(UserDto userDto);
+
+    boolean createUsercodigoval(UserDto userDto);
+
     boolean createUsercodigo(UserDto userDto);
 
     boolean validarcodigo(CodigoDto codigoDto);

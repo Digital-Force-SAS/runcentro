@@ -173,7 +173,66 @@ public class CCDRepository {
     public int  buscarcluster (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carrerasquit' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int  tallaS (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and variable6='S' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+    public int  tallaM(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and variable6='M' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+    public int  tallaL (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and variable6='L' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+    public int  tallaXL (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and variable6='XL' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+    public int  tallaXXL (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and variable6='XXL' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int  buscarclusterferia (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and evento='feria' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int  buscarclustersinquit (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carrerasquit' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
@@ -181,11 +240,20 @@ public class CCDRepository {
     public int updatecodigo(UserDto userDto) {
         String sql = "update codigos " +
                 " SET  estado = 'activo'" +
-                " WHERE codigo= ? ";
+                " WHERE codigo= ?   ";
         return template.update(sql, new Object[]{ userDto.getVariable9()});
     }
 
     public int  buscarcodigo (UserDto userDto) {
+        String sql = "SELECT COUNT(idcodigo) " +
+                "FROM codigos " +
+                "WHERE UPPER(codigo) = UPPER(?) and  UPPER(estado)='invalido' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable9()}, Integer.class);
+    }
+
+    public int  buscarcodigoval (UserDto userDto) {
         String sql = "SELECT COUNT(idcodigo) " +
                 "FROM codigos " +
                 "WHERE UPPER(codigo) = UPPER(?) and  UPPER(estado)='inactivo' "
@@ -193,6 +261,7 @@ public class CCDRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable9()}, Integer.class);
     }
+
 
 
 
