@@ -135,8 +135,8 @@ public class CCDController {
 
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/GetRegalopersona")
-        public ResponseEntity<GenericDto> GetRegalopersona(@RequestBody UserDto userDto) {
-            return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersona(userDto)));
+        public ResponseEntity<GenericDto> GetRegalopersona(@RequestBody RegaloDto regaloDto) {
+            return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersona(regaloDto)));
         }
 
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})

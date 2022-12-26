@@ -163,6 +163,23 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{codigoDto.getCodigo()}, Integer.class);
     }
 
+    public int validarpersonafinal(RegaloDto regaloDto) {
+        String sql = "SELECT COUNT(idusuario) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?)  "
+                ;
+
+        return template.queryForObject(sql, new Object[]{regaloDto.getIdusuariofin()}, Integer.class);
+    }
+
+    public int createregaloferia(RegaloDto regaloDto) {
+        String sql = "INSERT INTO regalos (idregalo,codigoregalo,idadminfin,idusuariofin ) " +
+                "VALUES (DEFAULT,?,?,?)";
+        return template.update(sql, new Object[]{regaloDto.getCodigoregalo(),regaloDto.getIdadminfin(),regaloDto.getIdusuariofin()});
+    }
+
+
+
 
     public int createUsercodigo(UserDto userDto) {
         String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento ) " +
@@ -178,6 +195,18 @@ public class CCDRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
+
+    public int  buscarclustersincamisa (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carrerasquit' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+
+
 
 
     public int  buscarcluster1 (UserDto userDto) {

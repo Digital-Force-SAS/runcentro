@@ -12,7 +12,7 @@ public interface CCDService {
 
     List<UserDto> getAllUsers();
     List<UserDto> getAllCiudadela4s(UserDto userDto);
-    List<UserDto> GetRegalopersona(UserDto userDto);
+    boolean GetRegalopersona(RegaloDto regaloDto);
     List<UserDto> GetRegalopersonamenor(UserDto userDto);
 
 

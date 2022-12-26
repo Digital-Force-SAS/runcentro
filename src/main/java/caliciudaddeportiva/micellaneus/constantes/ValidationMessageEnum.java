@@ -20,6 +20,9 @@ public enum ValidationMessageEnum {
     ERROR_NATE_ENTRADA("entradanotexist.code", "ENTRADAnotEXIST.message", "ENTRADAALREADYEXIST.recomen"),
 
     Regalono("regalono.code", "regalono.message", "regalono.recomen"),
+
+    nocupos("eventolleno.code", "eventolleno.message", "eventolleno.recomen"),
+
     regaloentrego("regaloentrego.code", "regaloentrego.message", "regaloentrego.recomen"),
     login("login.code", "login.message", "login.recomen"),
 
