@@ -22,9 +22,9 @@ public class CCDRepository {
     MessageExceptionUtil messageExceptionDtoUtil;
 
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,evento " +
+        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
                 "FROM usuarios " +
-                "where evento = 'ciudadela4' "+
+                "where evento = 'carreramujer' "+
                 "ORDER BY idusuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
     }
@@ -290,7 +290,7 @@ public class CCDRepository {
     public int  buscarclustervalidados2 (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='carreraextras' "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carreramujer' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
@@ -344,7 +344,7 @@ public class CCDRepository {
     public int getpersonaregalo(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4' ";
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'carreramujer' ";
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }

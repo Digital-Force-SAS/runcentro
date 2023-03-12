@@ -188,7 +188,7 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public boolean validarregalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalo(userDto) == 0 ){
+        if (CCDRepository.getpersonaregalo(userDto) >0 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
         } else if (CCDRepository.getRegalo(userDto) >= 1){

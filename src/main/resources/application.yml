@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://sql805.main-hosting.eu/u938606973_feriadeportiva
-    username: u938606973_feriadeportiva
-    password: Feriadeportiva1
+    url: jdbc:mysql://sql805.main-hosting.eu/u938606973_carreramujer
+    username: u938606973_carreramujer
+    password: 3174843970aB+
     hikari:
       connectionTimeout: 30000
       maximumPoolSize: 2
