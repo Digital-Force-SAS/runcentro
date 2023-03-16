@@ -24,7 +24,7 @@ public class CCDRepository {
     public List<UserDto> getAllUsers() {
         String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
                 "FROM usuarios " +
-                "where evento = 'carreramujer' "+
+
                 "ORDER BY idusuario ";
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
     }
