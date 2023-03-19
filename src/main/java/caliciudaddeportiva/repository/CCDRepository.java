@@ -302,6 +302,13 @@ public class CCDRepository {
         return template.update(sql, new Object[]{ userDto.getVariable9()});
     }
 
+    public int updatecarrera(UserDto userDto) {
+        String sql = "update usuarios " +
+                " SET  variable9 = 'registrado'" +
+                " WHERE variable1= ?   ";
+        return template.update(sql, new Object[]{ userDto.getVariable1()});
+    }
+
     public int  buscarcodigo (UserDto userDto) {
         String sql = "SELECT COUNT(idcodigo) " +
                 "FROM codigos " +
