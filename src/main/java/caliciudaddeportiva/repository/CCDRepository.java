@@ -290,7 +290,7 @@ public class CCDRepository {
     public int  buscarclustervalidados2 (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='carreramujer' "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carreramujerbene' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
