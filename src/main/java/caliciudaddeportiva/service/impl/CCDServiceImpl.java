@@ -215,9 +215,14 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarcluster(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }else if (CCDRepository.buscarclustersincamisa(userDto) >= 1000 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.nocupos));
+        }else if (CCDRepository.buscarclustersincamisa(userDto) >= 950 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.nocupos));
+        }else if (CCDRepository.buscarXS(userDto) >= 150 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarM(userDto) >= 600 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarXXL(userDto) >= 100 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+
         }else
 
         CCDRepository.createUsercodigo(userDto);
@@ -238,7 +243,14 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarclustervalidados2(userDto) >= 1) {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        } else if (CCDRepository.buscarcodigoval(userDto) == 1) {
+        }else if (CCDRepository.buscarXS(userDto) >= 150 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarM(userDto) >= 600 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarXXL(userDto) >= 100 ) {
+            throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarcodigoval(userDto) == 1) {
             CCDRepository.createUsercodigo(userDto);
             CCDRepository.updatecodigo(userDto);
             return true;

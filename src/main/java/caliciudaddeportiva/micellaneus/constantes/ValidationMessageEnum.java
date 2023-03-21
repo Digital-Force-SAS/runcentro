@@ -10,7 +10,7 @@ public enum ValidationMessageEnum {
     ERROR_UPDATE_ENTRADA("entradaexist.code", "ENTRADAEXIST.message", "ENTRADAALREADYEXIST.recomen"),
     errorcodigonoexiste("entradanotexist.code", "entradanotexist.message", "entradanotexist.recomen"),
 
-    TALLAS("entradanotexist.code", "entradanotexist.message", "entradanotexist.recomen"),
+    TALLAS("TALLAS.code", "TALLAS.message", "TALLAS.recomen"),
 
 
 

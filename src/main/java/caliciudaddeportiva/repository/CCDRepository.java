@@ -199,12 +199,18 @@ public class CCDRepository {
     public int  buscarclustersincamisa (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE   evento='carreramujerbene' "
+                "WHERE   evento='carreramujerbene' and variable9='registrado' "
                 ;
 
-        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+        return template.queryForObject(sql, new Object[]{}, Integer.class);
     }
+    public int  buscarXS (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='XS'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
+    public int  buscarS (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='S'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
+    public int  buscarM (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='M'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
+    public int  buscarL (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='L'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
+    public int  buscarXL (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='XL'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
 
+    public int  buscarXXL (UserDto userDto) {String sql = "SELECT COUNT(variable1) FROM usuarios   WHERE   evento='carreramujerbene' and variable9!='preregistro'  and variable10='XXL'"; return template.queryForObject(sql, new Object[]{}, Integer.class);}
 
 
 
