@@ -218,7 +218,7 @@ public class CCDServiceImpl implements CCDService {
         }else if (CCDRepository.buscarclustersincamisa(userDto) >= 1050 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.nocupos));
         }else if (CCDRepository.buscarXS(userDto) >= 150 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarM(userDto) >= 600 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarM(userDto) >= 700 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXXL(userDto) >= 100 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
@@ -245,7 +245,7 @@ public class CCDServiceImpl implements CCDService {
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
         }else if (CCDRepository.buscarXS(userDto) >= 150 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarM(userDto) >= 600 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
+        }else if (CCDRepository.buscarM(userDto) >= 700 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXXL(userDto) >= 100 ) {
