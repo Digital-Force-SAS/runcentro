@@ -244,7 +244,6 @@ public class CCDServiceImpl implements CCDService {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
         }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarM(userDto) >= 700 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
         }else if (CCDRepository.buscarXXL(userDto) >= 100 ) {
