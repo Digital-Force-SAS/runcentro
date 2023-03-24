@@ -7,9 +7,11 @@ import lombok.Data;
 public class RegaloDto {
 
     @JsonProperty("idregalo ")
-    private String idregalo ;
-    private int codigoregalo;
+    private int idregalo ;
+    private String codigoregalo;
     private String idadminfin;
-    private int idusuariofin;
+    private String idusuariofin;
+    private String numero;
+
 
 }

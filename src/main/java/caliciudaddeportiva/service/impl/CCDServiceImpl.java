@@ -49,29 +49,22 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
-        if (CCDRepository.getpersonaregalomenor(userDto) == 0 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        } else if (CCDRepository.getRegalomenor(userDto) >= 1){
+        if (CCDRepository.getpersonaregalomenor(userDto) >= 1 ){
+            return CCDRepository.GetRegalopersonamenor(userDto);
+
+        } else{
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
         }
-        try {
 
-            return CCDRepository.GetRegalopersonamenor(userDto);
-        } catch (Exception e) {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_GET_USERS));
-        }
     }
 
     public boolean GetRegalopersona(RegaloDto regaloDto) {
-        if (CCDRepository.validarpersonafinal(regaloDto) < 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
-        }
-        CCDRepository.createregaloferia(regaloDto);
+        if (CCDRepository.validarpersonafinal(regaloDto) >= 1 ){
         return true;
+        }
+        throw new BusinessCCDException(
+                messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
 
     }
 
@@ -107,14 +100,12 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public boolean entregarregalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalo(userDto) == 0 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        } else if (CCDRepository.getRegalo(userDto) >= 1){
+        if (CCDRepository.getpersonaregalo(userDto) >= 1 ){
+         return true;
+        } else {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
         }
-        return CCDRepository.updateUsuarioregaloentregar(userDto) > 0;
 
     }
 
@@ -169,9 +160,18 @@ public class CCDServiceImpl implements CCDService {
 
 
     @Override
-    public boolean createregalo(RegaloDto regaloDto) {
+    public boolean createregalo (RegaloDto regaloDto){
+        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
+            CCDRepository.actualizarkit(regaloDto);
+            CCDRepository.actualizausuregalo(regaloDto);
 
-        return CCDRepository.createregalo(regaloDto) > 0;
+            return true;
+        } else {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
+        }
+
+
     }
 
 

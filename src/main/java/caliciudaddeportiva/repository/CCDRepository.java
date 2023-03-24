@@ -166,7 +166,7 @@ public class CCDRepository {
     public int validarpersonafinal(RegaloDto regaloDto) {
         String sql = "SELECT COUNT(idusuario) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?)  "
+                "WHERE UPPER(variable1) = UPPER(?)  AND evento = 'carreramujerbene'  AND variable16 = 'pendiente' AND   variable9!='preregistro' "
                 ;
 
         return template.queryForObject(sql, new Object[]{regaloDto.getIdusuariofin()}, Integer.class);
@@ -348,7 +348,7 @@ public class CCDRepository {
     public int getRegalo(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'entregado'"
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'carreramujerbene'  AND variable16 = 'pendiente' AND   variable9!='preregistro'"
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
@@ -361,6 +361,32 @@ public class CCDRepository {
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
+
+    public int validarnumero(RegaloDto regaloDto) {
+        String sql = "SELECT COUNT(idregalo) " +
+                "FROM regalos " +
+                "WHERE UPPER(numero) = UPPER(?) AND codigoregalo   = 'inactivo' ";
+
+        return template.queryForObject(sql, new Object[]{regaloDto.getNumero()}, Integer.class);
+    }
+
+    public int actualizarkit(RegaloDto regaloDto ) {
+        String sql = "update regalos " +
+                " set idadminfin = ? ,  idusuariofin = ?  ,  codigoregalo='activo'" +
+
+
+                " WHERE UPPER(numero) = ? ";
+        return template.update(sql, new Object[]{regaloDto.getIdadminfin(),regaloDto.getIdusuariofin(),regaloDto.getNumero()});
+    }
+    public int actualizausuregalo(RegaloDto regaloDto ) {
+        String sql = "update usuarios " +
+                " set variable16 = 'reclamado'" +
+
+
+                " WHERE variable1 = ? ";
+        return template.update(sql, new Object[]{regaloDto.getIdusuariofin()});
+    }
+
 
     public int getRegaloadulto(UserDto userDto) {
         String sql = "SELECT COUNT(variable10) " +
@@ -393,7 +419,7 @@ public class CCDRepository {
     public int getpersonaregalomenor(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4' ";
+                "WHERE UPPER(variable1) = UPPER(?) AND evento = 'carreramujerbene'  AND variable16 = 'pendiente' AND   variable9!='preregistro'  ";
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
@@ -410,12 +436,22 @@ public class CCDRepository {
 
 
     public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
+        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
+                "FROM usuarios "+
+                "WHERE UPPER(variable1) = UPPER(?) "+
+                "LIMIT 1"
+                ;
+        return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
+    }
+
+
+    public List<UserDto> Getkit(RegaloDto regaloDto) {
         String sql = "SELECT idusuario, variable1,variable2,variable3,variable4,variable9,variable10,variable13 " +
                 "FROM usuarios "+
                 "WHERE UPPER(variable1) = UPPER(?) AND evento = 'ciudadela4'  AND variable13 = 'pendiente'"+
                 "LIMIT 1"
                 ;
-        return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
+        return template.query(sql, new Object[]{regaloDto.getIdusuariofin()}, new BeanPropertyRowMapper(UserDto.class));
     }
 
 /**
