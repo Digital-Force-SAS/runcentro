@@ -21,6 +21,12 @@ public enum ValidationMessageEnum {
 
     Regalono("regalono.code", "regalono.message", "regalono.recomen"),
 
+    Regalono1("regalono1.code", "regalono1.message", "regalono1.recomen"),
+
+
+    Regalono2("regalono2.code", "regalono2.message", "regalono2.recomen"),
+
+
     nocupos("eventolleno.code", "eventolleno.message", "eventolleno.recomen"),
 
     regaloentrego("regaloentrego.code", "regaloentrego.message", "regaloentrego.recomen"),

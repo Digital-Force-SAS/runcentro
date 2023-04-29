@@ -233,6 +233,12 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarclusterferia(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
+        }  else if (CCDRepository.buscarclusterferiacel(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono1));
+        }else   if (CCDRepository.buscarclusterferiacorr(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono2));
         }else
             CCDRepository.createUsercodigo(userDto);
         return true;

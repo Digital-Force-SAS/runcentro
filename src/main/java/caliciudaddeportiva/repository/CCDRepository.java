@@ -277,10 +277,28 @@ public class CCDRepository {
     public int  buscarclusterferia (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='feria' "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='futbolfam' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int  buscarclusterferiacel (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable4) = UPPER(?) and evento='futbolfam' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable4()}, Integer.class);
+    }
+
+    public int  buscarclusterferiacorr (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable13) = UPPER(?) and evento='futbolfam' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable13()}, Integer.class);
     }
 
     public int  buscarclustersinquit (UserDto userDto) {
