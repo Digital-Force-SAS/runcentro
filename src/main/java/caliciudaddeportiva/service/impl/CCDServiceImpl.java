@@ -24,6 +24,8 @@ public class CCDServiceImpl implements CCDService {
         this.messageExceptionDtoUtil = messageExceptionDtoUtil;
     }
 
+
+    //USUARIOS**************************************************************************************************
     @Override
     public List<UserDto> getAllUsers() {
         try {
@@ -34,293 +36,46 @@ public class CCDServiceImpl implements CCDService {
         }
     }
 
-    @Override
-    public List<UserDto> getAllCiudadela4s(UserDto userDto) {
-        try {
-            return CCDRepository.getAllCiudadela4s(userDto);
-        } catch (Exception e) {
+
+
+    //CIUDADELA**************************************************************************************************
+
+
+    public boolean createUserCiudadela(UserDto userDto) {
+        if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
-                    e  );
-        }
-    }
-
-
-
-
-    @Override
-    public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
-        if (CCDRepository.getpersonaregalomenor(userDto) >= 1 ){
-            return CCDRepository.GetRegalopersonamenor(userDto);
-
-        } else{
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
+        }  else if (CCDRepository.ContarUserCiudadela(userDto) >= 5 ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
-        }
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.CIUDADELALLENA));
+        }else{
 
-    }
-
-    public boolean GetRegalopersona(RegaloDto regaloDto) {
-        if (CCDRepository.validarpersonafinal(regaloDto) >= 1 ){
-        return true;
-        }
-        throw new BusinessCCDException(
-                messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
-
-    }
-
-
-
-
-
-    @Override
-    public List<UserDto> getUserByText(UserDto userDto) {
-        try {
-            return CCDRepository.getUserByVariable(userDto);
-        } catch (Exception e) {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_GET_USERS));
-        }
-    }
-
-
-
-
-    @Override
-    public boolean updateUser(UserDto userDto) {
-        try {
-            return CCDRepository.updateUsuario(userDto) > 0;
-        } catch (Exception e) {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_UPDATE_USER));
-        }
-    }
-
-
-
-
-    @Override
-    public boolean entregarregalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalo(userDto) >= 1 ){
-         return true;
-        } else {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-    @Override
-    public boolean deleteUser(int idUsuario) {
-        try {
-            return CCDRepository.deleteUser(idUsuario) > 0;
-        } catch (Exception e) {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_DELETE_USER));
-        }
-    }
-
-    @Override
-    public boolean createciudadela(UserDto userDto) {
-        if (CCDRepository.buscarcluster(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }else
-            CCDRepository.createUsercodigo(userDto);
-
-            return true;
-    }
-
-
-
-
-
-
-
-
-        @Override
-    public boolean createUser(UserDto userDto) {
-            if (CCDRepository.getUserByName(userDto) > 5){
-                throw new BusinessCCDException(
-                        messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.USER_ALREADY_EXIST));
-            } else if (CCDRepository.getcupos(userDto) >= 21){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ERROR_PLACA_PERSONA_ENTRADA));
-        }
-        return CCDRepository.createUser(userDto) > 0;
-        }
-
-
-
-    @Override
-    public boolean createregalo (RegaloDto regaloDto){
-        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
-            CCDRepository.actualizarkit(regaloDto);
-            CCDRepository.actualizausuregalo(regaloDto);
-
-            return true;
-        } else {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
-        }
-
-
-    }
-
-
-    @Override
-    public List<RegaloDto> buscarultimoregistroregalo(RegaloDto regaloDto) {
-        try {
-            return CCDRepository.buscarultimoregistroregalo(regaloDto);
-        } catch (Exception e) {
-            throw new BusinessCCDException(
-                    e  );
-        }
-    }
-
-
-    @Override
-    public boolean validarregalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalo(userDto) >0 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        } else if (CCDRepository.getRegalo(userDto) >= 1){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
-        }
-        return CCDRepository.updateUsuario(userDto) > 0;
-
-    }
-
-
-    @Override
-    public boolean validarmenor(UserDto userDto) {
-        if (CCDRepository.validarmenor(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Validarmenor));
-        }
-        return CCDRepository.createUsercodigo(userDto) > 0;
-
-    }
-
-
-    public boolean createUsercodigo(UserDto userDto) {
-        if (CCDRepository.buscarcluster(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }else if (CCDRepository.buscarclustersincamisa(userDto) >= 1050 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.nocupos));
-        }else if (CCDRepository.buscarXS(userDto) >= 150 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarS(userDto) >= 650 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarM(userDto) >= 700 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarL(userDto) >= 800 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarXL(userDto) >= 200 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-        }else if (CCDRepository.buscarXXL(userDto) >= 100 ){throw new BusinessCCDException(messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLAS));
-
-        }else
-
-        CCDRepository.createUsercodigo(userDto);
-        return true;
-        }
-
-    public boolean createUserferia(UserDto userDto) {
-        if (CCDRepository.buscarclusterferia(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }  else if (CCDRepository.buscarclusterferiacel(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono1));
-        }else   if (CCDRepository.buscarclusterferiacorr(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono2));
-        }else
-            CCDRepository.createUsercodigo(userDto);
-        return true;
-
-    }
-
-    public boolean createUsercodigoval(UserDto userDto) {
-        if (CCDRepository.buscarclustervalidados2(userDto) >= 1) {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }else if (CCDRepository.buscarcodigoval(userDto) == 1) {
-            CCDRepository.createUsercodigo(userDto);
-            CCDRepository.updatecodigo(userDto);
+            CCDRepository.createUserCiudadela(userDto);
             return true;
         }
-        throw new BusinessCCDException(
-                messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
-
     }
-
-
-        public boolean validarcodigo(CodigoDto codigoDto) {
-        if (CCDRepository.validarcodigo(codigoDto) != 1 ){
-
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.errorcodigonoexiste));
-        }
-        return true;
-
-    }
-
-    public boolean validarpersonacluster(UserDto userDto) {
-        if (CCDRepository.buscarcluster1(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        }
-
-
-        return true;
-
-    }
-
-    public boolean validarpersonaferia(UserDto userDto) {
-        if (CCDRepository.validarpersonaferia(userDto) >= 1 ){
-            return true;
-
-        }    throw new BusinessCCDException(
-                messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-
-
-    }
-
-
-
-
 
     @Override
-    public boolean validarregaloadulto(UserDto userDto) {
-        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+    public boolean ValidarMenor(UserDto userDto) {
+        if (CCDRepository.validarmenor(userDto)  == 0  ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.Regalono));
-        } else if (CCDRepository.getRegaloadulto(userDto) < 1){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENORNOEXISTE));
         }
         return true;
 
     }
 
 
-    @Override
-    public boolean loginadmin(AdminDto adminDto) {
-         if (CCDRepository.loginadmin(adminDto) < 1){
+    //CARRERA**************************************************************************************************
+
+
+    //FUTBOL FAM**************************************************************************************************
 
 
 
-             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.login));
-        }
-        return true;
 
-    }
+
+
 
 
 
