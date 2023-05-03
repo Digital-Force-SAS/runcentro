@@ -45,7 +45,7 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }  else if (CCDRepository.ContarUserCiudadela(userDto) >= 2100 ){
+        }  else if (CCDRepository.ContarUserCiudadela(userDto) >= 1990 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.CIUDADELALLENA));
         }else{
