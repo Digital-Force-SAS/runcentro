@@ -23,6 +23,21 @@ public class CCDController {
     public ResponseEntity<GenericDto> getAllUsers() {
         return ResponseEntity.ok().body(GenericDto.sucess(CCDService.getAllUsers()));
     }
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/loginadministrador")
+    public ResponseEntity<GenericDto> loginadmin(@RequestBody AdminDto adminDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.loginadmin(adminDto)), HttpStatus.CREATED);
+    }
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/loginciudadela")
+    public ResponseEntity<GenericDto> loginciudadela(@RequestBody AdminDto adminDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.loginciudadela(adminDto)), HttpStatus.CREATED);
+    }
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/logincarrera")
+    public ResponseEntity<GenericDto> logincarrera(@RequestBody AdminDto adminDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.logincarrera(adminDto)), HttpStatus.CREATED);
+    }
 
 
     //CIUDADELA****************************************************************************************************

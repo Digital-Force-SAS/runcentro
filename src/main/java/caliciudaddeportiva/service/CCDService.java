@@ -15,5 +15,12 @@ public interface CCDService {
     boolean createUserCiudadela(UserDto userDto);
     boolean ValidarMenor(UserDto userDto);
 
+    boolean loginadmin(AdminDto adminDto);
+
+    boolean loginciudadela(AdminDto adminDto);
+
+    boolean logincarrera(AdminDto adminDto);
+
+
 
 }

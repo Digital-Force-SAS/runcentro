@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class CCDServiceImpl implements CCDService {
 
-    public final CCDRepository CCDRepository;
+    public final CCDRepository  CCDRepository;
     private final MessageExceptionUtil messageExceptionDtoUtil;
 
     public CCDServiceImpl(CCDRepository CCDRepository, MessageExceptionUtil messageExceptionDtoUtil) {
@@ -36,6 +36,29 @@ public class CCDServiceImpl implements CCDService {
         }
     }
 
+    @Override
+    public boolean loginadmin(AdminDto adminDto) {
+        if (CCDRepository.loginadmin(adminDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.administradornoexiste));
+        }
+        return true;
+    }
+    public boolean loginciudadela(AdminDto adminDto) {
+        if (CCDRepository.loginciudadela(adminDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ciudadelvalidaranoexiste));
+        }
+        return true;
+    }
+    public boolean logincarrera(AdminDto adminDto) {
+        if (CCDRepository.logincarrera(adminDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreravalidarnoexiste));
+        }
+        return true;
+    }
+
 
 
     //CIUDADELA**************************************************************************************************
@@ -45,7 +68,7 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }  else if (CCDRepository.ContarUserCiudadela(userDto) >= 1990 ){
+        }  else if (CCDRepository.ContarUserCiudadela(userDto) >= 2400 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.CIUDADELALLENA));
         }else{

@@ -30,6 +30,29 @@ public class CCDRepository {
         return template.query(sql, new Object[]{}, new BeanPropertyRowMapper(UserDto.class));
     }
 
+
+    public int loginadmin(AdminDto adminDto) {
+        String sql = "SELECT COUNT(idadministrador) " +
+                "FROM administradores  " +
+                "WHERE UPPER(usuarioadmin) = ? AND  UPPER(contrasenaadmin) = ?  AND tipo = 'administrador'"
+                ;
+        return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
+    }
+
+    public int loginciudadela(AdminDto adminDto) {
+        String sql = "SELECT COUNT(idadministrador) " +
+                "FROM administradores  " +
+                "WHERE UPPER(usuarioadmin) = ? AND  UPPER(contrasenaadmin) = ?  AND tipo = 'ciudadela'"
+                ;
+        return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
+    }
+    public int logincarrera(AdminDto adminDto) {
+        String sql = "SELECT COUNT(idadministrador) " +
+                "FROM administradores  " +
+                "WHERE UPPER(usuarioadmin) = ? AND  UPPER(contrasenaadmin) = ?  AND tipo = 'carrera'"
+                ;
+        return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
+    }
     //CIUDADELA************************************************************************************************************************
 
     public int  buscarMenorCiudadela (UserDto userDto) {

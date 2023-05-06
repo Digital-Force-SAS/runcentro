@@ -2,18 +2,24 @@ package caliciudaddeportiva.micellaneus.constantes;
 
 public enum ValidationMessageEnum {
 
-    USER_ALREADY_EXIST("UserAlreadyExists.code", "UserAlreadyExists.message", "UserAlreadyExists.recomen"),
 
     CIUDADELALLENA("CIUDADELALLENA.code", "CIUDADELALLENA.message", "CIUDADELALLENA.recomen"),
 
     MENOREXISTE("MENOREXISTE.code", "MENOREXISTE.message", "MENOREXISTE.recomen"),
-    MENORNOEXISTE("MENORNOEXISTE.code", "MENORNOEXISTE.message", "MENORNOEXISTE.recomen");
+    MENORNOEXISTE("MENORNOEXISTE.code", "MENORNOEXISTE.message", "MENORNOEXISTE.recomen"),
+
+    administradornoexiste("administradornoexiste.code", "administradornoexiste.message", "administradornoexiste.recomen"),
+    ciudadelvalidaranoexiste("ciudadelvalidaranoexiste.code", "ciudadelvalidaranoexiste.message", "ciudadelvalidaranoexiste.recomen"),
+    carreravalidarnoexiste("carreravalidarnoexiste.code", "carreravalidarnoexiste.message", "carreravalidarnoexiste.recomen"),
 
 
 
 
 
 
+
+
+    USER_ALREADY_EXIST("UserAlreadyExists.code", "UserAlreadyExists.message", "UserAlreadyExists.recomen");
 
     private final String code;
     private final String message;
