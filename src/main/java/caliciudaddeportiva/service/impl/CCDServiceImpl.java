@@ -89,6 +89,60 @@ public class CCDServiceImpl implements CCDService {
     }
 
 
+    public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
+        if (CCDRepository.getpersonaregalomenor(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENORNOEXISTE));
+        } else if (CCDRepository.getRegalomenor(userDto) >= 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.REGALOENTREGADOMENOR));
+        }else{
+
+            return CCDRepository.GetRegalopersonamenor(userDto);
+        }
+    }
+
+
+
+    @Override
+    public boolean entregarregalo(UserDto userDto) {
+        if (CCDRepository.getpersonaregalomenor(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENORNOEXISTE));
+        } else if (CCDRepository.getRegalomenor(userDto) >= 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.REGALOENTREGADOMENOR));
+        }else{
+
+            return  CCDRepository.updateUsuarioregaloentregar(userDto)>0;
+
+            }
+
+
+    }
+
+    public boolean createregalo(RegaloDto regaloDto) {
+
+        return CCDRepository.createregalo(regaloDto) > 0;
+    }
+
+
+    @Override
+    public List<UserDto> GetRegalopersona(UserDto userDto) {
+        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ADULTOEXISTE));
+        } else if (CCDRepository.getRegaloadulto(userDto) < 1){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.REGALOENTREGADOADULTO));
+        }else {
+
+            return CCDRepository.GetRegalopersona(userDto) ;
+        }
+    }
+
+
+
     //CARRERA**************************************************************************************************
 
 

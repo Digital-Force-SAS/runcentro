@@ -11,6 +11,12 @@ public enum ValidationMessageEnum {
     administradornoexiste("administradornoexiste.code", "administradornoexiste.message", "administradornoexiste.recomen"),
     ciudadelvalidaranoexiste("ciudadelvalidaranoexiste.code", "ciudadelvalidaranoexiste.message", "ciudadelvalidaranoexiste.recomen"),
     carreravalidarnoexiste("carreravalidarnoexiste.code", "carreravalidarnoexiste.message", "carreravalidarnoexiste.recomen"),
+    REGALOENTREGADOMENOR("REGALOENTREGADOMENOR.code", "REGALOENTREGADOMENOR.message", "REGALOENTREGADOMENOR.recomen"),
+    ADULTOEXISTE("ADULTOEXISTE.code", "ADULTOEXISTE.message", "ADULTOEXISTE.recomen"),
+
+    REGALOENTREGADOADULTO("REGALOENTREGADOADULTO.code", "REGALOENTREGADOADULTO.message", "REGALOENTREGADOADULTO.recomen"),
+
+
 
 
 

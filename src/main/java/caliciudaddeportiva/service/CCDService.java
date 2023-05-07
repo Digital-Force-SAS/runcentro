@@ -21,6 +21,14 @@ public interface CCDService {
 
     boolean logincarrera(AdminDto adminDto);
 
+    List<UserDto> GetRegalopersonamenor(UserDto userDto);
+
+    boolean entregarregalo(UserDto userDto);
+
+    boolean createregalo(RegaloDto regaloDto);
+    List<UserDto> GetRegalopersona(UserDto userDto);
+
+
 
 
 }

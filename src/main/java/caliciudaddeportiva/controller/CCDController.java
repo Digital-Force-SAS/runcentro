@@ -55,6 +55,35 @@ public class CCDController {
     }
 
 
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/GetRegalopersonamenor")
+    public ResponseEntity<GenericDto> GetRegalopersonamenor(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersonamenor(userDto)));
+    }
+
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/entregaregalo")
+    public ResponseEntity<GenericDto> entregarregalo(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.entregarregalo(userDto)), HttpStatus.CREATED);
+    }
+
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createregalo")
+    public ResponseEntity<GenericDto> createregalo(@RequestBody RegaloDto regaloDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createregalo(regaloDto)), HttpStatus.CREATED);
+    }
+
+
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/GetRegalopersona")
+    public ResponseEntity<GenericDto> GetRegalopersona(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetRegalopersona(userDto)));
+    }
+
+
     //CARRERA****************************************************************************************************
 
 
