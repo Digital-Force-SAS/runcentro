@@ -161,6 +161,41 @@ public class CCDRepository {
     //CARRERA************************************************************************************************************************
 
 
+    public int createUserCarrera(UserDto userDto) {
+        String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento ) " +
+                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getVariable14(),userDto.getVariable15(),userDto.getVariable16(),userDto.getEvento()});
+    }
+
+    public int  buscarcuposcarrera3k (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE evento='carrera3k' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{}, Integer.class);
+    }
+
+
+    public int  buscarmenorcarrera3k (UserDto userDto) {
+        String sql = "SELECT COUNT( variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and evento='carrera3k' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int  buscaradultocarrera3k (UserDto userDto) {
+        String sql = "SELECT COUNT(variable8) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable8) = UPPER(?) and evento='carrera3k' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable8()}, Integer.class);
+    }
+
+
     //FUTBOL FAM ************************************************************************************************************************
 
 

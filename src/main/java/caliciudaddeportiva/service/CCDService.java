@@ -13,6 +13,9 @@ public interface CCDService {
     List<UserDto> getAllUsers();
 
     boolean createUserCiudadela(UserDto userDto);
+
+    boolean createUserCarrera(UserDto userDto);
+
     boolean ValidarMenor(UserDto userDto);
 
     boolean loginadmin(AdminDto adminDto);
