@@ -91,6 +91,12 @@ public class CCDController {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserCarrera(userDto)), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createUserCarrera7k")
+    public ResponseEntity<GenericDto> createUserCarrera7k(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserCarrera7k(userDto)), HttpStatus.CREATED);
+    }
+
     //FUTBOLFAM****************************************************************************************************
 
 

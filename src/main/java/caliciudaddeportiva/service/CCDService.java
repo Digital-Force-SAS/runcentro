@@ -14,7 +14,11 @@ public interface CCDService {
 
     boolean createUserCiudadela(UserDto userDto);
 
+
+    boolean createUserCarrera7k(UserDto userDto);
+
     boolean createUserCarrera(UserDto userDto);
+
 
     boolean ValidarMenor(UserDto userDto);
 

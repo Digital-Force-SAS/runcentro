@@ -163,6 +163,21 @@ public class CCDServiceImpl implements CCDService {
         }
     }
 
+    public boolean createUserCarrera7k(UserDto userDto) {
+        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 300 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreracupos7kno));
+        }  else if (CCDRepository.buscarmenorcarrera7k(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste7k));
+        } else{
+
+            CCDRepository.createUserCarrera(userDto);
+            return true;
+        }
+    }
+
+
     //FUTBOL FAM**************************************************************************************************
 
 

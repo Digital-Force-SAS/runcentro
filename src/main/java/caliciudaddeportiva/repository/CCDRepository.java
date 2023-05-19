@@ -186,6 +186,25 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
+    public int  buscarcuposcarrera7k (UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE evento='carrera7k' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{}, Integer.class);
+    }
+
+
+    public int  buscarmenorcarrera7k (UserDto userDto) {
+        String sql = "SELECT COUNT( variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?) and (evento='carrera7k' or evento='carrera3k') "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
     public int  buscaradultocarrera3k (UserDto userDto) {
         String sql = "SELECT COUNT(variable8) " +
                 "FROM usuarios " +

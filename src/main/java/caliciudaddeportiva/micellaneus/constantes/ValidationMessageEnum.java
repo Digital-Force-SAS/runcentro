@@ -21,6 +21,11 @@ public enum ValidationMessageEnum {
 
     carreraadultoexiste3k("carreraadultoexiste3k.code", "carreraadultoexiste3k.message", "carreraadultoexiste3k.recomen"),
 
+    carreracupos7kno("carreracupos3kno.code", "carreracupos3kno.message", "carreracupos3kno.recomen"),
+    carreramenorexiste7k("carreramenorexiste3k.code", "carreramenorexiste3k.message", "carreramenorexiste3k.recomen"),
+
+
+
 
 
 
