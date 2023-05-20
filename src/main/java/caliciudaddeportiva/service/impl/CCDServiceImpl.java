@@ -164,7 +164,7 @@ public class CCDServiceImpl implements CCDService {
     }
 
     public boolean createUserCarrera7k(UserDto userDto) {
-        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 300 ){
+        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 480 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreracupos7kno));
         }  else if (CCDRepository.buscarmenorcarrera7k(userDto) >= 1 ){
