@@ -25,8 +25,10 @@ public enum ValidationMessageEnum {
     carreramenorexiste7k("carreramenorexiste7k.code", "carreramenorexiste7k.message", "carreramenorexiste7k.recomen"),
 
 
+    regaloentrego("regaloentrego.code", "regaloentrego.message", "regaloentrego.recomen"),
 
 
+    numero("numero.code", "numero.message", "numero.recomen"),
 
 
 

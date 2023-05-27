@@ -164,7 +164,7 @@ public class CCDServiceImpl implements CCDService {
     }
 
     public boolean createUserCarrera7k(UserDto userDto) {
-        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 580 ){
+        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 1000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreracupos7kno));
         }  else if (CCDRepository.buscarmenorcarrera7k(userDto) >= 1 ){
@@ -175,6 +175,35 @@ public class CCDServiceImpl implements CCDService {
             CCDRepository.createUserCarrera(userDto);
             return true;
         }
+
+
+    }
+
+    @Override
+    public boolean createcarrera (RegaloDto regaloDto){
+        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
+            CCDRepository.actualizarkit(regaloDto);
+            CCDRepository.actualizausuregalo(regaloDto);
+
+            return true;
+        } else {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
+        }
+
+
+    }
+
+    @Override
+    public List<UserDto> GetCupoRegalo(UserDto userDto) {
+        if (CCDRepository.getpersonaregalomenorcarrera1(userDto) >= 1 ){
+            return CCDRepository.getpersonaregalomenorcarrera(userDto);
+
+        } else{
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
+        }
+
     }
 
 

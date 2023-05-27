@@ -97,6 +97,21 @@ public class CCDController {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserCarrera7k(userDto)), HttpStatus.CREATED);
     }
 
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/createcarrera")
+    public ResponseEntity<GenericDto> createcarrera(@RequestBody RegaloDto regaloDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.createcarrera(regaloDto)), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/GetCupoRegalo")
+    public ResponseEntity<GenericDto> GetCupoRegalo(@RequestBody UserDto userDto) {
+        return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetCupoRegalo(userDto)));
+    }
+
+
+
     //FUTBOLFAM****************************************************************************************************
 
 

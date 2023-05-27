@@ -205,6 +205,8 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
+
+
     public int  buscaradultocarrera3k (UserDto userDto) {
         String sql = "SELECT COUNT(variable8) " +
                 "FROM usuarios " +
@@ -212,7 +214,54 @@ public class CCDRepository {
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable8()}, Integer.class);
+
+
     }
+    public int getpersonaregalomenorcarrera1(UserDto userDto) {
+        String sql = "SELECT COUNT(variable1) " +
+                "FROM usuarios " +
+                "WHERE UPPER(variable1) = UPPER(?)  AND variable16 = 'pendiente'  ";
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+
+
+    public List<UserDto> getpersonaregalomenorcarrera(UserDto userDto) {
+        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
+                "FROM usuarios "+
+                "WHERE UPPER(variable1) = UPPER(?) "+
+                "LIMIT 1"
+                ;
+        return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
+    }
+
+    public int validarnumero(RegaloDto regaloDto) {
+        String sql = "SELECT COUNT(idregalo) " +
+                "FROM regalos " +
+                "WHERE UPPER(numero) = UPPER(?) AND codigoregalo   = 'inactivo' ";
+
+        return template.queryForObject(sql, new Object[]{regaloDto.getNumero()}, Integer.class);
+    }
+
+    public int actualizarkit(RegaloDto regaloDto ) {
+        String sql = "update regalos " +
+                " set idadminfin = ? ,  idusuariofin = ?  ,  codigoregalo= ?" +
+
+
+                " WHERE UPPER(numero) = ? ";
+        return template.update(sql, new Object[]{regaloDto.getIdadminfin(),regaloDto.getIdusuariofin(),regaloDto.getCodigoregalo(),regaloDto.getNumero()});
+    }
+    public int actualizausuregalo(RegaloDto regaloDto ) {
+        String sql = "update usuarios " +
+                " set variable16 = 'reclamado'" +
+
+
+                " WHERE variable1 = ? ";
+        return template.update(sql, new Object[]{regaloDto.getIdusuariofin()});
+    }
+
+
 
 
     //FUTBOL FAM ************************************************************************************************************************
