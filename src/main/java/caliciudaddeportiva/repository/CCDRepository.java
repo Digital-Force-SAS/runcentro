@@ -84,7 +84,7 @@ public class CCDRepository {
     public int validarmenor(UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and (evento='carrera7k' or evento='carrera3k') "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='ciudadela0705' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
