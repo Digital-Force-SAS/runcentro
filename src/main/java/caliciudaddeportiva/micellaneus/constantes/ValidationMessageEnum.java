@@ -15,7 +15,7 @@ public enum ValidationMessageEnum {
     ADULTOEXISTE("ADULTOEXISTE.code", "ADULTOEXISTE.message", "ADULTOEXISTE.recomen"),
 
     REGALOENTREGADOADULTO("REGALOENTREGADOADULTO.code", "REGALOENTREGADOADULTO.message", "REGALOENTREGADOADULTO.recomen"),
-    carreracupos3kno("carreracupos3kno.code", "carreracupos3kno.message", "carreracupos3kno.recomen"),
+    codigoErroneo("codigoErroneo.code", "codigoErroneo.message", "codigoErroneo.recomen"),
 
     carreramenorexiste3k("carreramenorexiste3k.code", "carreramenorexiste3k.message", "carreramenorexiste3k.recomen"),
 

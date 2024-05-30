@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/caliciudaddeportiva")
+@RequestMapping("/Solicitud")
 public class CCDController {
 
     @Autowired
@@ -52,6 +52,12 @@ public class CCDController {
     @PostMapping("/ValidarMenor")
     public ResponseEntity<GenericDto> ValidarMenor(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.ValidarMenor(userDto)), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
+    @PostMapping("/ValidarCupo")
+    public ResponseEntity<GenericDto> ValidarCupo(@RequestBody UserDto userDto) {
+        return new ResponseEntity<>(GenericDto.sucess(CCDService.ValidarCupo(userDto)), HttpStatus.CREATED);
     }
 
 

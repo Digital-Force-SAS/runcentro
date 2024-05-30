@@ -71,6 +71,7 @@ public class CCDServiceImpl implements CCDService {
         } else{
 
             CCDRepository.createUserCiudadela(userDto);
+            CCDRepository.ActualizarCodigo(userDto);
             return true;
         }
     }
@@ -79,7 +80,18 @@ public class CCDServiceImpl implements CCDService {
     public boolean ValidarMenor(UserDto userDto) {
         if (CCDRepository.validarmenor(userDto)  == 0  ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENORNOEXISTE));
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.codigoErroneo));
+        }
+        return true;
+
+    }
+
+
+    @Override
+    public boolean ValidarCupo(UserDto userDto) {
+        if (CCDRepository.ValidarCupo(userDto)  == 0  ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.codigoErroneo));
         }
         return true;
 
@@ -146,7 +158,7 @@ public class CCDServiceImpl implements CCDService {
     public boolean createUserCarrera(UserDto userDto) {
         if (CCDRepository.buscarcuposcarrera3k(userDto) >= 480 ){
             throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreracupos3kno));
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         }  else if (CCDRepository.buscarmenorcarrera3k(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));

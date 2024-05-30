@@ -58,7 +58,7 @@ public class CCDRepository {
     public int  buscarMenorCiudadela (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='ciudadela0705' "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='eventoyumbo' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
@@ -66,9 +66,9 @@ public class CCDRepository {
 
 
     public int createUserCiudadela(UserDto userDto) {
-        String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento ) " +
-                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getVariable14(),userDto.getVariable15(),userDto.getVariable16(),userDto.getEvento()});
+        String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,variable17,variable18,variable19,variable20,variable21,variable22,variable23,evento ) " +
+                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getVariable14(),userDto.getVariable15(),userDto.getVariable16(),userDto.getVariable17(),userDto.getVariable18(),userDto.getVariable19(),userDto.getVariable20(),userDto.getVariable21(),userDto.getVariable22(),userDto.getVariable23(),userDto.getEvento()});
     }
 
 
@@ -88,6 +88,15 @@ public class CCDRepository {
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
+    }
+
+    public int ValidarCupo(UserDto userDto) {
+        String sql = "SELECT COUNT(codigo) " +
+                "FROM codigos " +
+                "WHERE UPPER(codigo) = UPPER(?) AND UPPER(estado) = 'inactivo' "
+                ;
+
+        return template.queryForObject(sql, new Object[]{userDto.getVariable23()}, Integer.class);
     }
 
     public int getpersonaregalomenor(UserDto userDto) {
@@ -155,6 +164,15 @@ public class CCDRepository {
     }
 
 
+
+    public int ActualizarCodigo( UserDto userDto ) {
+        String sql = "update codigos " +
+                " set estado = 'activo' " +
+
+
+                " WHERE UPPER(codigo) = ? ";
+        return template.update(sql, new Object[]{userDto.getVariable23()});
+    }
 
 
 
