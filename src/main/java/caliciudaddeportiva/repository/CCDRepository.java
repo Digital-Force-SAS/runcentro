@@ -23,7 +23,7 @@ public class CCDRepository {
 
     //USUARIOS************************************************************************************************************************
     public List<UserDto> getAllUsers() {
-        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
+        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,variable17,evento " +
                 "FROM usuarios " +
 
                 "ORDER BY idusuario ";
