@@ -38,7 +38,7 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public boolean loginadmin(AdminDto adminDto) {
-        if (CCDRepository.loginadmin(adminDto) < 1){
+        if (CCDRepository.loginadmin(adminDto) < 2){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.administradornoexiste));
         }

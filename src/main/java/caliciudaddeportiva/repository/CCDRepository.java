@@ -58,7 +58,7 @@ public class CCDRepository {
     public int  buscarMenorCiudadela (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='eventoyumbo' "
+                "WHERE UPPER(variable1) = UPPER(?) and evento='ciudadela' "
                 ;
 
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
@@ -197,7 +197,7 @@ public class CCDRepository {
     public int  buscarcupos (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE evento='eventoyumbo' "
+                "WHERE evento='ciudadela' "
                 ;
 
         return template.queryForObject(sql, new Object[]{}, Integer.class);
