@@ -92,7 +92,7 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.ValidarCupo(userDto)  == 0  ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.codigoErroneo));
-        }else if (CCDRepository.buscarcupos(userDto) >= 1000 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 5000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         }
