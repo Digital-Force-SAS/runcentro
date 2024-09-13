@@ -68,6 +68,9 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
+        }else if (CCDRepository.buscarcupos(userDto) >= 2000 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{
             CCDRepository.createUserCiudadela(userDto);
             CCDRepository.ActualizarCodigo(userDto);
@@ -91,7 +94,7 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.ValidarCupo(userDto)  == 0  ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.codigoErroneo));
-        }else if (CCDRepository.buscarcupos(userDto) >= 6000 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 4900 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         }
