@@ -68,7 +68,21 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 5600 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 3000 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
+        } else{
+            CCDRepository.createUserCiudadela(userDto);
+            CCDRepository.ActualizarCodigo(userDto);
+            return true;
+        }
+    }
+
+    public boolean createUserCiudadelaCodigo(UserDto userDto) {
+        if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
+        }else if (CCDRepository.buscarcupos(userDto) >= 1000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{

@@ -3,8 +3,8 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://srv960.hstgr.io/u938606973_ciud0112
-    username: u938606973_ciud0112
+    url: jdbc:mysql://srv960.hstgr.io/u938606973_ciud1222
+    username: u938606973_ciud1222
     password: 3174843970aB1+
     hikari:
       connectionTimeout: 30000

@@ -13,6 +13,8 @@ public interface CCDService {
     List<UserDto> getAllUsers();
 
     boolean createUserCiudadela(UserDto userDto);
+    boolean createUserCiudadelaCodigo(UserDto userDto);
+
 
 
     boolean createUserCarrera7k(UserDto userDto);
