@@ -46,21 +46,14 @@ public class CCDRepository {
                 ;
         return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
     }
-    public int logincarrera(AdminDto adminDto) {
-        String sql = "SELECT COUNT(idadministrador) " +
-                "FROM administradores  " +
-                "WHERE UPPER(usuarioadmin) = ? AND  UPPER(contrasenaadmin) = ?  AND tipo = 'carrera'"
-                ;
-        return template.queryForObject(sql, new Object[]{adminDto.getUsuarioadmin(),adminDto.getContrasenaadmin()}, Integer.class);
-    }
+
     //CIUDADELA************************************************************************************************************************
 
     public int  buscarMenorCiudadela (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='ciudadela' "
+                "WHERE UPPER(variable1) = UPPER(?) and (evento='ciudadela' or evento='ciudadelacodigo') "
                 ;
-
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
 
@@ -176,122 +169,24 @@ public class CCDRepository {
 
 
 
-    //CARRERA************************************************************************************************************************
 
-
-    public int createUserCarrera(UserDto userDto) {
-        String sql = "INSERT INTO usuarios (idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento ) " +
-                "VALUES (DEFAULT,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        return template.update(sql, new Object[]{userDto.getVariable1(), userDto.getVariable2(), userDto.getVariable3(),userDto.getVariable4(),userDto.getVariable5(), userDto.getVariable6(),userDto.getVariable7(),userDto.getVariable8(),userDto.getVariable9(),userDto.getVariable10(),userDto.getVariable11(),userDto.getVariable12(),userDto.getVariable13(),userDto.getVariable14(),userDto.getVariable15(),userDto.getVariable16(),userDto.getEvento()});
-    }
-
-    public int  buscarcuposcarrera3k (UserDto userDto) {
-        String sql = "SELECT COUNT(variable1) " +
-                "FROM usuarios " +
-                "WHERE evento='carrera3k' "
-                ;
-
-        return template.queryForObject(sql, new Object[]{}, Integer.class);
-    }
 
     public int  buscarcupos (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE evento='ciudadela' "
+                "WHERE evento='ciudadela'  "
                 ;
 
         return template.queryForObject(sql, new Object[]{}, Integer.class);
     }
 
-
-    public int  buscarmenorcarrera3k (UserDto userDto) {
-        String sql = "SELECT COUNT( variable1) " +
-                "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and evento='carrera3k' "
-                ;
-
-        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
-    }
-
-    public int  buscarcuposcarrera7k (UserDto userDto) {
+    public int  buscarcuposCodigo (UserDto userDto) {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
-                "WHERE evento='carrera3k' "
+                "WHERE evento='ciudadelacodigo' "
                 ;
 
         return template.queryForObject(sql, new Object[]{}, Integer.class);
     }
-
-
-    public int  buscarmenorcarrera7k (UserDto userDto) {
-        String sql = "SELECT COUNT( variable1) " +
-                "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?) and (evento='carrera7k' or evento='carrera3k') "
-                ;
-
-        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
-    }
-
-
-
-    public int  buscaradultocarrera3k (UserDto userDto) {
-        String sql = "SELECT COUNT(variable8) " +
-                "FROM usuarios " +
-                "WHERE UPPER(variable8) = UPPER(?) and evento='carrera3k' "
-                ;
-
-        return template.queryForObject(sql, new Object[]{userDto.getVariable8()}, Integer.class);
-
-
-    }
-    public int getpersonaregalomenorcarrera1(UserDto userDto) {
-        String sql = "SELECT COUNT(variable1) " +
-                "FROM usuarios " +
-                "WHERE UPPER(variable1) = UPPER(?)  AND variable16 = 'pendiente'  ";
-
-        return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
-    }
-
-
-
-    public List<UserDto> getpersonaregalomenorcarrera(UserDto userDto) {
-        String sql = "SELECT idusuario,variable1,variable2,variable3,variable4,variable5,variable6,variable7,variable8,variable9,variable10,variable11,variable12,variable13,variable14,variable15,variable16,evento " +
-                "FROM usuarios "+
-                "WHERE UPPER(variable1) = UPPER(?) "+
-                "LIMIT 1"
-                ;
-        return template.query(sql, new Object[]{userDto.getVariable1()}, new BeanPropertyRowMapper(UserDto.class));
-    }
-
-    public int validarnumero(RegaloDto regaloDto) {
-        String sql = "SELECT COUNT(idregalo) " +
-                "FROM regalos " +
-                "WHERE UPPER(numero) = UPPER(?) AND codigoregalo   = 'inactivo' ";
-
-        return template.queryForObject(sql, new Object[]{regaloDto.getNumero()}, Integer.class);
-    }
-
-    public int actualizarkit(RegaloDto regaloDto ) {
-        String sql = "update regalos " +
-                " set idadminfin = ? ,  idusuariofin = ?  ,  codigoregalo= ?" +
-
-
-                " WHERE UPPER(numero) = ? ";
-        return template.update(sql, new Object[]{regaloDto.getIdadminfin(),regaloDto.getIdusuariofin(),regaloDto.getCodigoregalo(),regaloDto.getNumero()});
-    }
-    public int actualizausuregalo(RegaloDto regaloDto ) {
-        String sql = "update usuarios " +
-                " set variable16 = 'reclamado'" +
-
-
-                " WHERE variable1 = ? ";
-        return template.update(sql, new Object[]{regaloDto.getIdusuariofin()});
-    }
-
-
-
-
-    //FUTBOL FAM ************************************************************************************************************************
-
 
 }

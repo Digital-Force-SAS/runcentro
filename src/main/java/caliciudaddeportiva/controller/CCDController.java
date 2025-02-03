@@ -33,11 +33,7 @@ public class CCDController {
     public ResponseEntity<GenericDto> loginciudadela(@RequestBody AdminDto adminDto) {
         return new ResponseEntity<>(GenericDto.sucess(CCDService.loginciudadela(adminDto)), HttpStatus.CREATED);
     }
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
-    @PostMapping("/logincarrera")
-    public ResponseEntity<GenericDto> logincarrera(@RequestBody AdminDto adminDto) {
-        return new ResponseEntity<>(GenericDto.sucess(CCDService.logincarrera(adminDto)), HttpStatus.CREATED);
-    }
+
 
 
     //CIUDADELA****************************************************************************************************
@@ -96,35 +92,12 @@ public class CCDController {
     }
 
 
-    //CARRERA****************************************************************************************************
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
-    @PostMapping("/createUserCarrera")
-    public ResponseEntity<GenericDto> createUserCarrera(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserCarrera(userDto)), HttpStatus.CREATED);
-    }
-
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
-    @PostMapping("/createUserCarrera7k")
-    public ResponseEntity<GenericDto> createUserCarrera7k(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(GenericDto.sucess(CCDService.createUserCarrera7k(userDto)), HttpStatus.CREATED);
-    }
-
-
-    @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
-    @PostMapping("/createcarrera")
-    public ResponseEntity<GenericDto> createcarrera(@RequestBody RegaloDto regaloDto) {
-        return new ResponseEntity<>(GenericDto.sucess(CCDService.createcarrera(regaloDto)), HttpStatus.CREATED);
-    }
-
     @CrossOrigin(origins ={"https://caliciudaddeportiva.com/","https://caliciudaddeportiva.com", "http://localhost:4200","**","*"}, methods= {RequestMethod.GET,RequestMethod.POST})
     @PostMapping("/GetCupoRegalo")
     public ResponseEntity<GenericDto> GetCupoRegalo(@RequestBody UserDto userDto) {
         return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetCupoRegalo(userDto)));
     }
 
-
-
-    //FUTBOLFAM****************************************************************************************************
 
 
 }

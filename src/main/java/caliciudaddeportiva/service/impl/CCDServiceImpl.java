@@ -2,7 +2,6 @@ package caliciudaddeportiva.service.impl;
 
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.CodigoDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
@@ -51,13 +50,7 @@ public class CCDServiceImpl implements CCDService {
         }
         return true;
     }
-    public boolean logincarrera(AdminDto adminDto) {
-        if (CCDRepository.logincarrera(adminDto) < 1){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreravalidarnoexiste));
-        }
-        return true;
-    }
+
 
 
 
@@ -68,21 +61,22 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 3000 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 1000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{
             CCDRepository.createUserCiudadela(userDto);
-            CCDRepository.ActualizarCodigo(userDto);
             return true;
         }
     }
+
+    //***************************************************************************************************
 
     public boolean createUserCiudadelaCodigo(UserDto userDto) {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 4000 ){
+        }else if (CCDRepository.buscarcuposCodigo(userDto) >= 4000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{
@@ -91,7 +85,7 @@ public class CCDServiceImpl implements CCDService {
             return true;
         }
     }
-
+//***********************************************************************************************
     @Override
     public boolean ValidarMenor(UserDto userDto) {
         if (CCDRepository.validarmenor(userDto)  == 0  ){
@@ -174,59 +168,14 @@ public class CCDServiceImpl implements CCDService {
     //CARRERA**************************************************************************************************
 
 
-    public boolean createUserCarrera(UserDto userDto) {
-        if (CCDRepository.buscarcuposcarrera3k(userDto) >= 480 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
-        }  else if (CCDRepository.buscarmenorcarrera3k(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
-        } else if (CCDRepository.buscaradultocarrera3k(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreraadultoexiste3k));
-        }else{
-
-            CCDRepository.createUserCarrera(userDto);
-            return true;
-        }
-    }
-
-    public boolean createUserCarrera7k(UserDto userDto) {
-        if (CCDRepository.buscarcuposcarrera7k(userDto) >= 1000 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreracupos7kno));
-        }  else if (CCDRepository.buscarmenorcarrera7k(userDto) >= 1 ){
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste7k));
-        } else{
-
-            CCDRepository.createUserCarrera(userDto);
-            return true;
-        }
 
 
-    }
-
-    @Override
-    public boolean createcarrera (RegaloDto regaloDto){
-        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
-            CCDRepository.actualizarkit(regaloDto);
-            CCDRepository.actualizausuregalo(regaloDto);
-
-            return true;
-        } else {
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
-        }
-
-
-    }
 
     @Override
     public List<UserDto> GetCupoRegalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalomenorcarrera1(userDto) >= 1 ){
-            return CCDRepository.getpersonaregalomenorcarrera(userDto);
-
+        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ADULTOEXISTE));
         } else{
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));

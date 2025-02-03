@@ -17,9 +17,6 @@ public interface CCDService {
 
 
 
-    boolean createUserCarrera7k(UserDto userDto);
-
-    boolean createUserCarrera(UserDto userDto);
 
 
     boolean ValidarMenor(UserDto userDto);
@@ -33,7 +30,6 @@ public interface CCDService {
 
     boolean loginciudadela(AdminDto adminDto);
 
-    boolean logincarrera(AdminDto adminDto);
 
     List<UserDto> GetRegalopersonamenor(UserDto userDto);
 
@@ -45,7 +41,6 @@ public interface CCDService {
 
     List<UserDto> GetCupoRegalo(UserDto userDto);
 
-    boolean createcarrera(RegaloDto regaloDto);
 
 
 
