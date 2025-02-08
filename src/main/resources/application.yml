@@ -7,7 +7,9 @@ spring:
     username: u938606973_Ciu_09_02_2025
     password: 3174843970aB1+X
     hikari:
-      connectionTimeout: 30000
-      maximumPoolSize: 3
-      maxLifetime: 1800000
+      connectionTimeout: 40000
+      maximumPoolSize: 10
+      maxLifetime: 600000        # 10 minutos (menor que el timeout de la BD)
+      idleTimeout: 300000        # 5 minutos de inactividad antes de cerrar conexiones
+      keepaliveTime: 300000      # Mantiene vivas las conexiones cada 5 minutos
       autoCommit: true
