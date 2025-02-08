@@ -7,7 +7,7 @@ spring:
     username: u938606973_Ciu_09_02_2025
     password: 3174843970aB1+X
     hikari:
-      connectionTimeout: 30000
-      maximumPoolSize: 2
+      connectionTimeout: 60000
+      maximumPoolSize: 10
       maxLifetime: 1800000
       autoCommit: true
