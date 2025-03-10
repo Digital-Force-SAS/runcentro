@@ -1,13 +1,18 @@
 package caliciudaddeportiva.service.impl;
 
+
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
+import caliciudaddeportiva.micellaneus.dto.RegaloDto;
+import caliciudaddeportiva.micellaneus.dto.EmailRequestDto;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import caliciudaddeportiva.repository.CCDRepository;
 import caliciudaddeportiva.service.CCDService;
+import caliciudaddeportiva.service.impl.EmailService; // Importa el servicio de email
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,10 +22,14 @@ public class CCDServiceImpl implements CCDService {
 
     public final CCDRepository  CCDRepository;
     private final MessageExceptionUtil messageExceptionDtoUtil;
+    private final EmailService emailService; // Inyectamos el servicio de email
 
-    public CCDServiceImpl(CCDRepository CCDRepository, MessageExceptionUtil messageExceptionDtoUtil) {
+    public CCDServiceImpl(CCDRepository CCDRepository,
+                          MessageExceptionUtil messageExceptionDtoUtil,
+                          EmailService emailService ) {
         this.CCDRepository = CCDRepository;
         this.messageExceptionDtoUtil = messageExceptionDtoUtil;
+        this.emailService = emailService; // Asignamos el servicio de email
     }
 
 
@@ -61,11 +70,27 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 1700 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 10000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{
             CCDRepository.createUserCiudadela(userDto);
+
+            // 📧 Enviar correo de confirmación
+            EmailRequestDto emailRequest = new EmailRequestDto();
+            emailRequest.setToEmail(userDto.getVariable18());
+            // Obteniendo nombre completo del menor
+            emailRequest.setNameMenor(userDto.getVariable2());
+            emailRequest.setLastNameMenor(userDto.getVariable3());
+            // Obteniendo nombre completo del adulto
+            emailRequest.setNameAdulto(userDto.getVariable9());
+            emailRequest.setLastNameAdulto(userDto.getVariable10());
+
+            // Obtener el código
+            emailRequest.setCode(userDto.getVariable20());
+
+            ResponseEntity<String> response = emailService.sendEmail(emailRequest);
+            System.out.println("Email enviado: " + response.getBody()); // Opcional, para debug
             return true;
         }
     }
