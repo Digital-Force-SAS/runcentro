@@ -89,7 +89,7 @@ public class CCDRepository {
                 "WHERE UPPER(codigo) = UPPER(?) AND UPPER(estado) = 'inactivo' "
                 ;
 
-        return template.queryForObject(sql, new Object[]{userDto.getVariable23()}, Integer.class);
+        return template.queryForObject(sql, new Object[]{userDto.getVariable2()}, Integer.class);
     }
 
     public int getpersonaregalomenor(UserDto userDto) {
@@ -164,7 +164,7 @@ public class CCDRepository {
 
 
                 " WHERE UPPER(codigo) = ? ";
-        return template.update(sql, new Object[]{userDto.getVariable23()});
+        return template.update(sql, new Object[]{userDto.getVariable2()});
     }
 
 
