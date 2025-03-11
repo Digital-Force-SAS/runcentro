@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/Solicitud")
+@CrossOrigin
 public class CCDController {
 
     @Autowired
