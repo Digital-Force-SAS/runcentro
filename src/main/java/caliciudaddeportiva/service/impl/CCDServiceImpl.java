@@ -75,22 +75,22 @@ public class CCDServiceImpl implements CCDService {
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else{
             CCDRepository.createUserCiudadela(userDto);
-
+/*
             // 📧 Enviar correo de confirmación
             EmailRequestDto emailRequest = new EmailRequestDto();
-            emailRequest.setToEmail(userDto.getVariable18());
+            emailRequest.setToEmail(userDto.getVariable7());
             // Obteniendo nombre completo del menor
-            emailRequest.setNameMenor(userDto.getVariable2());
-            emailRequest.setLastNameMenor(userDto.getVariable3());
+            emailRequest.setNameMenor(userDto.getVariable3());
+            emailRequest.setLastNameMenor(userDto.getVariable4());
             // Obteniendo nombre completo del adulto
-            emailRequest.setNameAdulto(userDto.getVariable9());
-            emailRequest.setLastNameAdulto(userDto.getVariable10());
+            *//*emailRequest.setNameAdulto(userDto.getVariable9());
+            emailRequest.setLastNameAdulto(userDto.getVariable10());*//*
 
             // Obtener el código
-            emailRequest.setCode(userDto.getVariable20());
+            emailRequest.setCode(userDto.getVariable15());
 
             ResponseEntity<String> response = emailService.sendEmail(emailRequest);
-            System.out.println("Email enviado: " + response.getBody()); // Opcional, para debug
+            System.out.println("Email enviado: " + response.getBody()); // Opcional, para debug*/
             return true;
         }
     }
