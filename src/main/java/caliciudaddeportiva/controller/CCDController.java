@@ -99,6 +99,13 @@ public class CCDController {
         return ResponseEntity.ok().body(GenericDto.sucess(CCDService.GetCupoRegalo(userDto)));
     }
 
+    // obtener tallas disponibles
+    @CrossOrigin(origins = {"https://caliciudaddeportiva.com/", "https://caliciudaddeportiva.com", "http://localhost:4200", "**", "*"},
+            methods = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping("/GetTallasDisponibles")
+    public ResponseEntity<GenericDto> getTallasDisponibles() {
+        return ResponseEntity.ok().body(GenericDto.sucess(CCDService.obtenerTallasDisponibles()));
+    }
 
 
 }

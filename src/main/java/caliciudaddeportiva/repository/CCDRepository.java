@@ -1,9 +1,6 @@
 package caliciudaddeportiva.repository;
 
-import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.CodigoDto;
-import caliciudaddeportiva.micellaneus.dto.RegaloDto;
-import caliciudaddeportiva.micellaneus.dto.UserDto;
+import caliciudaddeportiva.micellaneus.dto.*;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -189,4 +186,24 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{}, Integer.class);
     }
 
+
+    // Tallas
+    // Actualiza el número de tallas disponibles según se registren
+    public int actualizarTalla(String talla, int cantidad) {
+        String sql = "UPDATE tallas SET cantidad_disponible = cantidad_disponible - ? WHERE UPPER(nombre) = UPPER(?) AND cantidad_disponible >= ?";
+        return template.update(sql, new Object[]{cantidad, talla, cantidad});
+    }
+
+    // Obtiene todas las tallas disponibles para el frontend
+    public List<TallaDto> obtenerTallasDisponibles() {
+        String sql = "SELECT nombre, cantidad_disponible FROM tallas WHERE cantidad_disponible > 0 ORDER BY nombre";
+        return template.query(sql, new BeanPropertyRowMapper<>(TallaDto.class));
+    }
+
+    // Valida si una talla específica está disponible
+    public boolean validarTallaDisponible(String talla) {
+        String sql = "SELECT COUNT(*) FROM tallas WHERE UPPER(nombre) = UPPER(?) AND cantidad_disponible > 0";
+        Integer count = template.queryForObject(sql, new Object[]{talla}, Integer.class);
+        return count != null && count > 0;
+    }
 }
