@@ -2,7 +2,6 @@ package caliciudaddeportiva.service.impl;
 
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.EmailRequestDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
 import caliciudaddeportiva.micellaneus.dto.TallaDto;
@@ -10,7 +9,6 @@ import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import caliciudaddeportiva.repository.CCDRepository;
 import caliciudaddeportiva.service.CCDService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -66,7 +64,7 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 1110 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 1370 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
         } else if (!CCDRepository.validarTallaDisponible(userDto.getVariable11())) {
@@ -217,14 +215,26 @@ public class CCDServiceImpl implements CCDService {
 
 
     @Override
-    public List<UserDto> GetCupoRegalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+    public boolean GetCupoRegalo(UserDto userDto) {
+        if (CCDRepository.getRegaloadulto(userDto) == 0 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ADULTOEXISTE));
-        } else{
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
         }
+        return true;
+    }
+
+    @Override
+    public boolean createcarrera (RegaloDto regaloDto){
+        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
+            CCDRepository.actualizarkit(regaloDto);
+            CCDRepository.actualizausuregalo(regaloDto);
+
+            return true;
+        } else {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
+        }
+
 
     }
 
