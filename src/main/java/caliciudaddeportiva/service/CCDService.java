@@ -39,7 +39,7 @@ public interface CCDService {
     List<UserDto> GetRegalopersona(UserDto userDto);
 
 
-    boolean GetCupoRegalo(UserDto userDto);
+    List<UserDto> GetCupoRegalo(UserDto userDto);
 
     boolean createcarrera(RegaloDto regaloDto);
 

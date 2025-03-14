@@ -215,12 +215,12 @@ public class CCDServiceImpl implements CCDService {
 
 
     @Override
-    public boolean GetCupoRegalo(UserDto userDto) {
+    public List<UserDto> GetCupoRegalo(UserDto userDto) {
         if (CCDRepository.getRegaloadulto(userDto) == 0 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ADULTOEXISTE));
         }
-        return true;
+        return CCDRepository.GetRegalopersona(userDto);
     }
 
     @Override

@@ -147,11 +147,30 @@ public class CCDRepository {
 
 
     public List<UserDto> GetRegalopersona(UserDto userDto) {
-        String sql = "SELECT idusuario, variable1,variable2,variable5,variable9,variable12,variable21,variable20 " +
-                "FROM usuarios "+
-                "WHERE UPPER(variable12) = UPPER(?) AND (evento='ciudadela' or evento='ciudadelacodigo') AND variable21 = 'pendiente'"
-                ;
-        return template.query(sql, new Object[]{userDto.getVariable12()}, new BeanPropertyRowMapper(UserDto.class));
+        String sql = "SELECT idusuario, variable1, variable2, variable3, variable4, " +
+                "variable5, variable6, variable7, variable9, variable11, variable12, " +
+                "variable20, variable21 " +
+                "FROM usuarios " +
+                "WHERE variable1 = ? AND (evento='ciudadela' or evento='ciudadelacodigo') " +
+                "AND variable16 = 'pendiente'";
+
+        return template.query(sql, new Object[]{Integer.parseInt(userDto.getVariable1())}, (rs, rowNum) -> {
+            UserDto dto = new UserDto();
+            dto.setIdusuario(rs.getInt("idusuario"));
+            dto.setVariable1(rs.getString("variable1"));
+            dto.setVariable2(rs.getString("variable2"));
+            dto.setVariable3(rs.getString("variable3"));
+            dto.setVariable4(rs.getString("variable4"));
+            dto.setVariable5(rs.getString("variable5"));
+            dto.setVariable6(rs.getString("variable6"));
+            dto.setVariable7(rs.getString("variable7"));
+            dto.setVariable9(rs.getString("variable9"));
+            dto.setVariable11(rs.getString("variable11"));
+            dto.setVariable12(rs.getString("variable12"));
+            dto.setVariable20(rs.getString("variable20"));
+            dto.setVariable21(rs.getString("variable21"));
+            return dto;
+        });
     }
 
 
@@ -169,7 +188,7 @@ public class CCDRepository {
     public int validarnumero(RegaloDto regaloDto) {
         String sql = "SELECT COUNT(idregalo) " +
                 "FROM regalos " +
-                "WHERE UPPER(numero) = UPPER(?) AND codigoregalo   = 'inactivo' ";
+                "WHERE numero = ? AND codigoregalo   = 'inactivo' ";
 
         return template.queryForObject(sql, new Object[]{regaloDto.getNumero()}, Integer.class);
     }
@@ -183,12 +202,15 @@ public class CCDRepository {
         return template.update(sql, new Object[]{regaloDto.getIdadminfin(),regaloDto.getIdusuariofin(),regaloDto.getCodigoregalo(),regaloDto.getNumero()});
     }
     public int actualizausuregalo(RegaloDto regaloDto ) {
-        String sql = "update usuarios " +
-                " set variable16 = 'reclamado'" +
+        System.out.println("numero " + regaloDto.getNumero());
+        String sql = "UPDATE usuarios " +
+                "SET variable17 = ? " +
+                "WHERE variable1 = ?";
 
-
-                " WHERE variable1 = ? ";
-        return template.update(sql, new Object[]{regaloDto.getIdusuariofin()});
+        return template.update(sql, new Object[]{
+                regaloDto.getNumero(),  // El número del regalo se guarda en variable17
+                regaloDto.getIdusuariofin() // Se usa idusuariofin como condición
+        });
     }
 
     public int  buscarcupos (UserDto userDto) {
