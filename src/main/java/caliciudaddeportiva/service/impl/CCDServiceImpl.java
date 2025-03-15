@@ -4,6 +4,7 @@ import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
+import caliciudaddeportiva.micellaneus.dto.TallaDto;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import caliciudaddeportiva.repository.CCDRepository;
@@ -17,10 +18,12 @@ public class CCDServiceImpl implements CCDService {
 
     public final CCDRepository  CCDRepository;
     private final MessageExceptionUtil messageExceptionDtoUtil;
+    private final EmailService emailService; // Inyectamos el servicio de email
 
-    public CCDServiceImpl(CCDRepository CCDRepository, MessageExceptionUtil messageExceptionDtoUtil) {
+    public CCDServiceImpl(CCDRepository CCDRepository, MessageExceptionUtil messageExceptionDtoUtil, EmailService emailService) {
         this.CCDRepository = CCDRepository;
         this.messageExceptionDtoUtil = messageExceptionDtoUtil;
+        this.emailService = emailService; // Asignamos el servicio de email
     }
 
 
@@ -61,11 +64,30 @@ public class CCDServiceImpl implements CCDService {
         if (CCDRepository.buscarMenorCiudadela(userDto) >= 1 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.MENOREXISTE));
-        }else if (CCDRepository.buscarcupos(userDto) >= 370 ){
+        }else if (CCDRepository.buscarcupos(userDto) >= 1370 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
+        } else if (!CCDRepository.validarTallaDisponible(userDto.getVariable11())) {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLA_NO_DISPONIBLE));
         } else{
             CCDRepository.createUserCiudadela(userDto);
+            // 🔹 Actualizar la cantidad de tallas disponibles
+            int cantidadReducida = 1; // Asumiendo que se reduce una unidad por registro
+            int filasAfectadas = CCDRepository.actualizarTalla(userDto.getVariable11(), cantidadReducida);
+
+           /* // 📧 Enviar correo de confirmación
+            EmailRequestDto emailRequest = new EmailRequestDto();
+            emailRequest.setToEmail(userDto.getVariable7());
+
+            // Obteniendo nombre
+            emailRequest.setName(userDto.getVariable3());
+            emailRequest.setLastName(userDto.getVariable4());
+
+            // Obtener el código
+            emailRequest.setCode(userDto.getVariable15());
+            ResponseEntity<String> response = emailService.sendEmail(emailRequest);
+            System.out.println("Email enviado: " + response.getBody()); // Opcional, para debug*/
             return true;
         }
     }
@@ -82,9 +104,30 @@ public class CCDServiceImpl implements CCDService {
         } else if (CCDRepository.buscarcuposCodigo(userDto) >= 2000 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.carreramenorexiste3k));
-        } else{
+        } else if (!CCDRepository.validarTallaDisponible(userDto.getVariable11())) {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLA_NO_DISPONIBLE));
+        }   else {
             CCDRepository.createUserCiudadela(userDto);
             CCDRepository.ActualizarCodigo(userDto);
+
+            // 🔹 Actualizar la cantidad de tallas disponibles
+            int cantidadReducida = 1; // Asumiendo que se reduce una unidad por registro
+            int filasAfectadas = CCDRepository.actualizarTalla(userDto.getVariable11(), cantidadReducida);
+
+         /*   // 📧 Enviar correo de confirmación
+            EmailRequestDto emailRequest = new EmailRequestDto();
+            emailRequest.setToEmail(userDto.getVariable7());
+
+            // Obteniendo nombre
+            emailRequest.setName(userDto.getVariable3());
+            emailRequest.setLastName(userDto.getVariable4());
+
+            // Obtener el código
+            emailRequest.setCode(userDto.getVariable15());
+            ResponseEntity<String> response = emailService.sendEmail(emailRequest);
+            System.out.println("Email enviado: " + response.getBody()); // Opcional, para debug*/
+
             return true;
         }
     }
@@ -173,19 +216,36 @@ public class CCDServiceImpl implements CCDService {
 
     @Override
     public List<UserDto> GetCupoRegalo(UserDto userDto) {
-        if (CCDRepository.getpersonaregalodulto(userDto) == 0 ){
+        if (CCDRepository.getRegaloadulto(userDto) == 0 ){
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.ADULTOEXISTE));
-        } else{
-            throw new BusinessCCDException(
-                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.regaloentrego));
         }
+        return CCDRepository.GetRegalopersona(userDto);
+    }
+
+    @Override
+    public boolean createcarrera (RegaloDto regaloDto){
+        if (CCDRepository.validarnumero(regaloDto) >= 1 ){
+            CCDRepository.actualizarkit(regaloDto);
+            CCDRepository.actualizausuregalo(regaloDto);
+
+            return true;
+        } else {
+            throw new BusinessCCDException(
+                    messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.numero));
+        }
+
 
     }
 
 
     //FUTBOL FAM**************************************************************************************************
 
+    // Tallas
+    @Override
+    public List<TallaDto> obtenerTallasDisponibles() {
+        return CCDRepository.obtenerTallasDisponibles();
+    }
 
 
 

@@ -33,12 +33,12 @@ public enum ValidationMessageEnum {
 
 
 
+    TALLA_NO_DISPONIBLE("TALLA_NO_DISPONIBLE.code", "TALLA_NO_DISPONIBLE.message", "TALLA_NO_DISPONIBLE.recomen");
 
 
 
 
-
-    USER_ALREADY_EXIST("UserAlreadyExists.code", "UserAlreadyExists.message", "UserAlreadyExists.recomen");
+    // USER_ALREADY_EXIST("UserAlreadyExists.code", "UserAlreadyExists.message", "UserAlreadyExists.recomen");
 
     private final String code;
     private final String message;

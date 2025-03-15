@@ -1,9 +1,9 @@
 package caliciudaddeportiva.service;
 
 import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.CodigoDto;
 import caliciudaddeportiva.micellaneus.dto.RegaloDto;
 import caliciudaddeportiva.micellaneus.dto.UserDto;
+import caliciudaddeportiva.micellaneus.dto.TallaDto;
 
 import java.util.List;
 
@@ -41,12 +41,8 @@ public interface CCDService {
 
     List<UserDto> GetCupoRegalo(UserDto userDto);
 
+    boolean createcarrera(RegaloDto regaloDto);
 
-
-
-
-
-
-
+    List<TallaDto> obtenerTallasDisponibles();
 
 }
