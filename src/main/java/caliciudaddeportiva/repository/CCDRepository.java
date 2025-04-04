@@ -202,7 +202,6 @@ public class CCDRepository {
         return template.update(sql, new Object[]{regaloDto.getIdadminfin(),regaloDto.getIdusuariofin(),regaloDto.getCodigoregalo(),regaloDto.getNumero()});
     }
     public int actualizausuregalo(RegaloDto regaloDto ) {
-        System.out.println("numero " + regaloDto.getNumero());
         String sql = "UPDATE usuarios " +
                 "SET variable17 = ? " +
                 "WHERE variable1 = ?";
