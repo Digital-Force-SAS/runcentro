@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://srv958.hstgr.io/u938606973_runcentro
-    username: u938606973_runcentro
-    password: 3174843970aB1+
+    url: jdbc:mysql://srv958.hstgr.io/u938606973_run_abril_2025
+    username: u938606973_run_abril_2025
+    password: 3174843970aB1+A
     hikari:
       connectionTimeout: 40000
       maximumPoolSize: 10
