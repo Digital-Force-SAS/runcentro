@@ -203,7 +203,7 @@ public class CCDRepository {
     }
     public int actualizausuregalo(RegaloDto regaloDto ) {
         String sql = "UPDATE usuarios " +
-                "SET variable17 = ? " +
+                "SET variable17 = ? ,variable16 = 'entregado' " +
                 "WHERE variable1 = ?";
 
         return template.update(sql, new Object[]{

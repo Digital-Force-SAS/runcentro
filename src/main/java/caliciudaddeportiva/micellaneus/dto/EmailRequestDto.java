@@ -12,11 +12,17 @@ import lombok.Setter;
 public class EmailRequestDto {
     private String toEmail;
     private String toName;
-    private String name;
-    private String lastName;
+    private String nameMenor;
+    private String nameAdulto;
+    private String lastNameMenor;
+    private String lastNameAdulto;
     private String code;
 
-    public String getFullName() {
-        return name + " " + lastName;
+    public String getFullNameMenor() {
+        return nameMenor + " " + lastNameMenor;
+    }
+
+    public String getFullNameAdulto() {
+        return nameAdulto + " " + lastNameAdulto;
     }
 }
