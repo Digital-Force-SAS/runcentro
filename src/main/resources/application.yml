@@ -3,13 +3,13 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://srv958.hstgr.io/u938606973_run_abril_2025
-    username: u938606973_run_abril_2025
+    url: jdbc:mysql://srv958.hstgr.io/u938606973_crocs_06_2025
+    username: u938606973_crocs_06_2025
     password: 3174843970aB1+A
     hikari:
-      connectionTimeout: 40000
-      maximumPoolSize: 10
-      maxLifetime: 600000        # 10 minutos (menor que el timeout de la BD)
-      idleTimeout: 300000        # 5 minutos de inactividad antes de cerrar conexiones
-      keepaliveTime: 300000      # Mantiene vivas las conexiones cada 5 minutos
+      connectionTimeout: 10000         # 10 segundos para obtener una conexión
+      maximumPoolSize: 5
+      maxLifetime: 15000               # 15 segundos (menos que wait_timeout)
+      idleTimeout: 10000               # 10 segundos
+      keepaliveTime: 10000             # 10 segundos para mantenerla viva
       autoCommit: true
