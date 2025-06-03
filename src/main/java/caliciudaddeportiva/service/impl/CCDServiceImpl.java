@@ -1,10 +1,7 @@
 package caliciudaddeportiva.service.impl;
 
 import caliciudaddeportiva.micellaneus.constantes.ValidationMessageEnum;
-import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.RegaloDto;
-import caliciudaddeportiva.micellaneus.dto.UserDto;
-import caliciudaddeportiva.micellaneus.dto.TallaDto;
+import caliciudaddeportiva.micellaneus.dto.*;
 import caliciudaddeportiva.micellaneus.exeption.BusinessCCDException;
 import caliciudaddeportiva.micellaneus.util.MessageExceptionUtil;
 import caliciudaddeportiva.repository.CCDRepository;
@@ -73,11 +70,17 @@ public class CCDServiceImpl implements CCDService {
         } else if (!CCDRepository.validarTallaDisponible(userDto.getVariable11())) {
             throw new BusinessCCDException(
                     messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.TALLA_NO_DISPONIBLE));
-        } else{
+        } else if (!CCDRepository.validarHorarioDisponible(userDto.getVariable19())) {
+           throw new BusinessCCDException(
+                   messageExceptionDtoUtil.resolveMessage(ValidationMessageEnum.HORARIO_NO_DISPONIBLE));
+       } else{
             CCDRepository.createUserCiudadela(userDto);
             // 🔹 Actualizar la cantidad de tallas disponibles
             int cantidadReducida = 1; // Asumiendo que se reduce una unidad por registro
             int filasAfectadas = CCDRepository.actualizarTalla(userDto.getVariable11(), cantidadReducida);
+
+            // Actualizar la cantidad de horarios disponibles
+           int filasAfectadasHorarios = CCDRepository.actualizarHorario(userDto.getVariable19(), cantidadReducida);
 
            /* // 📧 Enviar correo de confirmación
             EmailRequestDto emailRequest = new EmailRequestDto();
@@ -250,6 +253,11 @@ public class CCDServiceImpl implements CCDService {
         return CCDRepository.obtenerTallasDisponibles();
     }
 
+    // Horario
+    @Override
+    public List<HorarioDto> obtenerHorariosDisponibles() {
+        return CCDRepository.obtenerHorariosDisponibles();
+    }
 
 
 

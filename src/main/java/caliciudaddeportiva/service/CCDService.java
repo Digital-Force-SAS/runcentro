@@ -1,9 +1,6 @@
 package caliciudaddeportiva.service;
 
-import caliciudaddeportiva.micellaneus.dto.AdminDto;
-import caliciudaddeportiva.micellaneus.dto.RegaloDto;
-import caliciudaddeportiva.micellaneus.dto.UserDto;
-import caliciudaddeportiva.micellaneus.dto.TallaDto;
+import caliciudaddeportiva.micellaneus.dto.*;
 
 import java.util.List;
 
@@ -45,4 +42,5 @@ public interface CCDService {
 
     List<TallaDto> obtenerTallasDisponibles();
 
+    List<HorarioDto> obtenerHorariosDisponibles();
 }

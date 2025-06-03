@@ -30,12 +30,10 @@ public enum ValidationMessageEnum {
 
     numero("numero.code", "numero.message", "numero.recomen"),
 
-
+    HORARIO_NO_DISPONIBLE("HORARIO_NO_DISPONIBLE.code", "HORARIO_NO_DISPONIBLE.message", "HORARIO_NO_DISPONIBLE.recomen"),
 
 
     TALLA_NO_DISPONIBLE("TALLA_NO_DISPONIBLE.code", "TALLA_NO_DISPONIBLE.message", "TALLA_NO_DISPONIBLE.recomen");
-
-
 
 
     // USER_ALREADY_EXIST("UserAlreadyExists.code", "UserAlreadyExists.message", "UserAlreadyExists.recomen");

@@ -258,4 +258,24 @@ public class CCDRepository {
         Integer count = template.queryForObject(sql, new Object[]{talla}, Integer.class);
         return count != null && count > 0;
     }
+
+    // Horarios
+    // Actualiza el número de horarios disponibles según se registren
+    public int actualizarHorario(String horario, int cantidad) {
+        String sql = "UPDATE horarios SET cantidad_disponible = cantidad_disponible - ? WHERE UPPER(nombre) = UPPER(?) AND cantidad_disponible >= ?";
+        return template.update(sql, new Object[]{cantidad, horario, cantidad});
+    }
+    // Obtiene todas los horarios disponibles para el frontend
+    public List<HorarioDto> obtenerHorariosDisponibles() {
+        String sql = "SELECT nombre, cantidad_disponible FROM horarios WHERE cantidad_disponible > 0 ORDER BY nombre";
+        return template.query(sql, new BeanPropertyRowMapper<>(HorarioDto.class));
+    }
+
+    // Valida si un horario específico está disponible
+    public boolean validarHorarioDisponible(String horario) {
+        String sql = "SELECT COUNT(*) FROM horarios WHERE UPPER(nombre) = UPPER(?) AND cantidad_disponible > 0";
+        Integer count = template.queryForObject(sql, new Object[]{horario}, Integer.class);
+        return count != null && count > 0;
+    }
+
 }
