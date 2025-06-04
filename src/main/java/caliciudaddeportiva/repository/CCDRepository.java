@@ -114,7 +114,7 @@ public class CCDRepository {
         return template.queryForObject(sql, new Object[]{userDto.getVariable1()}, Integer.class);
     }
     public List<UserDto> GetRegalopersonamenor(UserDto userDto) {
-        String sql = "SELECT idusuario, variable1,variable2,variable5,variable9,variable12,variable21,variable20 " +
+        String sql = "SELECT *" +
                 "FROM usuarios "+
                 "WHERE UPPER(variable1) = UPPER(?) AND (evento='ciudadela' or evento='ciudadelacodigo')  AND variable21 = 'pendiente'"+
                 "LIMIT 1"
@@ -147,7 +147,7 @@ public class CCDRepository {
         String sql = "SELECT COUNT(variable1) " +
                 "FROM usuarios " +
                 "WHERE (evento='ciudadela' OR evento='ciudadelacodigo') " +
-                "AND variable16 = 'pendiente' " +
+                "AND variable21 = 'pendiente' " +
                 "AND variable1 = ?";
 
         return template.queryForObject(sql, new Object[]{Integer.parseInt(userDto.getVariable1())}, Integer.class);
@@ -157,10 +157,10 @@ public class CCDRepository {
     public List<UserDto> GetRegalopersona(UserDto userDto) {
         String sql = "SELECT idusuario, variable1, variable2, variable3, variable4, " +
                 "variable5, variable6, variable7, variable9, variable11, variable12, " +
-                "variable20, variable21 " +
+                "variable20, variable21, variable23 " +
                 "FROM usuarios " +
                 "WHERE variable1 = ? AND (evento='ciudadela' or evento='ciudadelacodigo') " +
-                "AND variable16 = 'pendiente'";
+                "AND variable21 = 'pendiente'";
 
         return template.query(sql, new Object[]{Integer.parseInt(userDto.getVariable1())}, (rs, rowNum) -> {
             UserDto dto = new UserDto();
@@ -177,6 +177,7 @@ public class CCDRepository {
             dto.setVariable12(rs.getString("variable12"));
             dto.setVariable20(rs.getString("variable20"));
             dto.setVariable21(rs.getString("variable21"));
+            dto.setVariable23(rs.getString("variable23"));
             return dto;
         });
     }
